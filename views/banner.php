@@ -4,7 +4,7 @@
 	<li>
 		<a  href="<?=$bannerItem['url']?>"><img src="<?=$bannerItem['src']?>" /></a>
 		<div class="orbit-caption"><?=$bannerItem['caption']?></div>
-	</li>
+	</li> 
 
 	<?php  }?>
 
