@@ -18,7 +18,7 @@
 	    $_wuser = "root";
 		$_wpass = "root";	
 	    $_wdata = "dbfasti";
-	    $_wdomi = "http://192.168.1.123/wonderlandplayground.com/";
+	    $_wdomi = "http://192.168.1.123/wonder/";
 	}
 	
 	#Configuración principal del sitio
