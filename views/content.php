@@ -57,9 +57,9 @@ if($type!=''){
 				
 				
 ?>
-<div class="row panel" > 
+<div class="row panel " > 
        <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns ">
-			<h3 ><?=$array[name]?></h3>
+			<h3 ><?=$array[name]?><h3>
 			<?php 
 			//echo $_conf['folder']."<br>";
 			if($_conf['folder']){ 
@@ -86,17 +86,16 @@ if($type!=''){
                     
 								if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
 								$cont++;
-								if($cont==1){echo '<div class="large-12 columns panel radius"><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
+								if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
 								?>
 
 
-                           <li style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
+                           <li class="adrian" style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
                          
                     <?php 
-                            if($cont==1){echo '</ul></div>	';}
 
                             } 
-                        }
+                        }    if($cont!=0){echo '</ul></div>	';}
                     } 
          }?> 				
 					
