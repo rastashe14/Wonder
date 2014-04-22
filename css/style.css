@@ -1,0 +1,260 @@
+body {
+  background-image:url('../img/bg.gif');
+}
+
+
+.logo{
+	margin: 0px;
+	margin-top: 3px;
+	
+}
+
+a{
+	color: #87bff3 !important;
+	
+}
+
+/*menu */
+.menuParties a{
+	
+	background: url('../img/menu1.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuPricing a{
+	
+	background: url('../img/menu2.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuGroups a{
+	
+	background: url('../img/menu3.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuGallery a{
+	
+	background: url('../img/menu4.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuLocation a{
+	
+	background: url('../img/menu5.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuFAQs a{
+	
+	background: url('../img/menu6.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuContact a{
+	
+	background: url('../img/menu7.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 142px !important;
+	text-decoration:none !important;
+	text-align: center;
+	vertical-align:text-bottom  !important;
+}
+.top-bar, .top-bar-section, .left {
+	
+	background:transparent !important;
+	
+}
+
+h4{
+	
+	font-size: 32px !important;
+	color: #fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-weight: bold !important;
+}
+
+h3{
+	
+	color: #ff810a !important;
+	font-size: 22px !important;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	text-transform: none !important;
+}
+p{
+	color: #333333 !important;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important; 
+	font-size: 13px !important;
+	line-height: 19px !important;
+}
+.side-nav li a{
+	color: #87bff3 !important;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif !important; 
+	
+}
+
+/*.panel{
+	
+	background: #357cbe;  Old browsers 
+	background: -moz-linear-gradient(-45deg,  #357cbe 0%, #093c6d 100%);  FF3.6+ 
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#357cbe), color-stop(100%,#093c6d));  Chrome,Safari4+ 
+	background: -webkit-linear-gradient(-45deg,  #357cbe 0%,#093c6d 100%);  Chrome10+,Safari5.1+ 
+	background: -o-linear-gradient(-45deg,  #357cbe 0%,#093c6d 100%);  Opera 11.10+ 
+	background: -ms-linear-gradient(-45deg,  #357cbe 0%,#093c6d 100%);  IE10+ 
+	background: linear-gradient(135deg,  #357cbe 0%,#093c6d 100%);  W3C 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#357cbe', endColorstr='#093c6d',GradientType=1 );  IE6-9 fallback on horizontal gradient 
+	border: 0;
+}*/
+
+
+/*footer*/
+
+.menuPartiesFooter a{
+	color:#61319B !important;
+}
+.menuPricingFooter a{
+	color:#2E6AA2 !important;
+}
+.menuGroupsFooter a{
+	color:#0D8BA4 !important;
+}
+.menuGalleryFooter a{
+	color:#8BB204 !important;
+}
+.menuLocationFooter a{
+	color:#CBBB03 !important;
+}
+.menuFAQsFooter a{
+	color:#FF6D09 !important;
+}
+.menuContactFooter a{
+	color:#DE0E62 !important;
+}
+
+.orbit-caption{
+	
+	font-size: 150% !important;
+}
+.orbit-bullets li{
+	background-color: #CBBB03 !important;
+}
+.orbit-bullets .active{
+	background-color: #FF6D09 !important;
+}
+label{
+	color:  #87bff3 !important;
+}
+
+label small{
+	color: #ccc !important;
+}
+
+
+/*calendar*/
+
+/* calendar */
+table.calendar	{ 
+	border-left:1px solid #999;
+}
+tr.calendar-row	{  }
+td.calendar-day	{ 
+	min-height:80px; 
+	font-size:50%; 
+	position:relative; 
+	cursor: pointer;
+} 
+td.selected	{ 
+	background-color: #DE0E62;
+	
+} 
+* html div.calendar-day { 
+	height:80px; 
+}
+td.calendar-day:hover	{ 
+	background:#FF810A;
+}
+td.calendar-day-np	{ 
+	background: #cce0df;
+	min-height:80px; 
+	font-size:50%;
+} 
+* html div.calendar-day-np { 
+	height:80px; 
+}
+td.calendar-day-head { 
+	font-size:70%; 
+	background:#ccc; 
+	font-weight:bold; 
+	text-align:center;
+	width:120px; 
+	padding:5px; 
+	border-bottom:1px solid #999; 
+	border-top:1px solid #999; 
+	border-right:1px solid #999; 
+}
+div.day-number		{ 
+	background:#999; 
+	padding:5px; 
+	color:#fff; 
+	font-weight:bold; 
+	float:right; 
+	margin:-5px -5px 0 0; 
+	width:20px; 
+	text-align:center; 
+}
+
+/* shared */
+td.calendar-day, td.calendar-day-np { 
+	width:120px; 
+	padding:5px; 
+	border-bottom:1px solid #999; 
+	border-right:1px solid #999; 
+}
