@@ -44,7 +44,7 @@
 ?>
 <fieldset>
 	
-	<legend>CALENDAR</legend>
+	<legend>EVENTS</legend>
 	<form action="?url=views/calendar/update.php" method="post">
 		
 	<div class="row">
@@ -64,7 +64,7 @@
 	<div class="row">&nbsp;</div>
 	<div class="row">
 		<div class="date-field large-8 columns">
-			<label>Start Date  <small>required</small></label>
+			<label>Start Date Time <small>required</small></label>
 			<div class="date-field large-4 columns">
 				<input type="date" name="start_date" value="<?=$dti[0]?>" required>
 				<!-- <small class="error">Start date is required.</small> -->
