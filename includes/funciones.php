@@ -695,5 +695,26 @@ function draw_calendar($next){
 	return $calendar;
 }
 
+function regex($name){
+	switch($name){
+		case 'youtubelong'	:return '/\bhttps?:\\/\\/((m\\.|www\\.)?(youtube\\.com\\/)(embed\\/|watch\\?(.*&)*(v=))(.{11}).*)\b/i';
+
+		case 'youtube'		:return '/\bhttps?:\\/\\/((m\\.|www\\.)?(youtube\\.com\\/)(embed\\/|watch\\?(.*&)*(v=))(.{11})|(youtu\\.be\\/(.{11}))).*\b/i';//code=7&9
+
+		case 'vimeo'		:return '/\bhttps?:\\/\\/(((vimeo\\.com\\/)))((.{8,}))\b/i';//code=5
+
+		case 'video'		:return '/\bhttps?:\\/\\/(vimeo\\.com\\/.{8,}|youtu\\.be\\/.{11}.*|(m\\.|www\\.)?youtube\\.com\\/(.+)(v=.{11}).*)?\b/i';//video=1
+
+		default				:return '/.*/i';
+	}
+}
+
+function isVideo($type,&$value){
+	if($type=='youtube')
+		return preg_match(regex('youtube'),$value);
+	elseif($type=='vimeo')
+		return preg_match(regex('vimeo'),$value);
+}
+
 	 
 ?>

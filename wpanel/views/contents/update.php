@@ -40,6 +40,9 @@
     <td ><?=substr($content[summary],0,40)?>...</td>
     <td  ><?=campo('status','id', $content[id_status], 'name')?></td>
     <td  >
+    	<?php if($_GET['type']!=1){?>
+		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/video.php"> <img src="../img/video.png" width="16" title="Video." /></a>
+		<?php } ?>
 		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/galeria.php"> <img src="../img/photo.png" width="16" title="Photos." /></a>
 		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/contents/add.php"><img src="../img/editar.png" width="16" title="Update."  />
 		<a href='#' data-reveal-id='services_<?=$content[id]?>'  >	

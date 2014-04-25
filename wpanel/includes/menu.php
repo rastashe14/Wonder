@@ -14,6 +14,8 @@
 			<li ><a href="index.php?url=views/company/profile.php">Company</a></li>
 			<li class="divider"></li>
 			<li ><a href="index.php?url=views/galeria.php&type=galeria">Gallery</a></li>
+			<!-- <li class="divider"></li>
+			<li ><a href="index.php?url=views/video.php&type=video">Videos</a></li> -->
 			
 <!--			
 			<li class="divider"></li>
@@ -85,8 +87,13 @@
 			<li class="divider"></li>
 			<li ><a href="index.php?url=views/booking.php">Booking List</a></li>
 			<li class="divider"></li>
-
-
+			<li class="has-dropdown"><a href="#">Calendar</a>
+				<ul class="dropdown">
+					<li><a href="index.php?url=views/calendar/calendar.php">Add</a></li>
+					<li><a href="index.php?url=views/calendar/update.php">Update</a></li>
+				</ul>
+			</li>
+			<li class="divider"></li>
 		</ul>
 		<ul class="right" >
 			<li class="divider"></li>

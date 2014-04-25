@@ -119,7 +119,10 @@ FCKConfig.ToolbarSets["Default"] = [
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
-	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','Image']
+	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','Image'],
+	'/',
+	['Style','FontFormat','FontName','FontSize'],
+	['TextColor','BGColor']
 ] ;
 
 FCKConfig.EnterMode = 'p' ;			// p | div | br

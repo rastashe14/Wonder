@@ -33,7 +33,9 @@
   
   <link rel="stylesheet" href="css/foundation.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/vendor/jquery.js"></script>
   <script src="js/vendor/custom.modernizr.js"></script>
+   
 </head>
 <body>
 <?php 

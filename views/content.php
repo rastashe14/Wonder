@@ -55,13 +55,78 @@ if($type!=''){
 				
 			
 				
-				
+if($id=="home"){				
 ?>
+<div class="row panel text-center titleIni">
+	Remember to bring socks
+</div>
+<?php } ?>
 <div class="row panel " > 
        <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns ">
-			<h3 ><?=$array[name]?><h3>
-			<?php 
-			//echo $_conf['folder']."<br>";
+       <?php if($type==1&&$id=='home'){
+       	$newsB = mysql_query($_conf['sql_menu']) or die (mysql_error());
+       	$news = mysql_fetch_assoc($newsB);
+       	?>
+		<div class="row" >
+       		<ul data-orbit data-options="timer_speed: 3000; animation_speed: 1000; pause_on_hover: false;">
+	       		<?php  
+				$newsB = mysql_query($_conf['sql_menu']) or die (mysql_error());
+			
+				while($news = mysql_fetch_assoc($newsB)){ 
+				?>
+				<li ><p>&nbsp;</p>
+					<h3><?=$news[name]?></h3>
+					<h1><?=$news[text]?></h1>
+					<?php
+						if($_conf['folder']){ 
+							$folder='img/'.$_conf['folder'].'/'.$news['id'];
+							if (file_exists($folder)) { ?>
+			<!--				<h4><a href="#galery" >View Gallery</a></h4>-->
+							<?php }
+						
+						}
+						if (file_exists($folder) && $_conf['folder']) { 
+						
+								if (file_exists($folder)) {
+								
+			                        $pics = opendir($folder);
+			                        $cont=0;
+			                        while ($pic = readdir($pics)){
+			                            if ($pic != "." && $pic != ".."&& $pic != ".svn" && $pic != "Thumbs.db" && trim($pic, ' ') != '' && $pic!='index.html' && $pic!='' && $pic!='.DS_Store' && $pic!='_notes'){  
+			                    
+											if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
+											$cont++;
+											if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
+											?>
+
+
+			                           <li style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
+			                         
+			                    <?php 
+
+			                            } 
+			                        }    if($cont!=0){echo '</ul></div>	';}
+			                    } 
+			         }
+			         ?>
+					
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+	   <?php }elseif($type==1&&$id!='home'){?>
+
+			<h3><?=$array[name]?><h3>
+			<p><?=$array[text]?></p>
+			<?php }else{
+				?>
+
+			<h3><?=$array[name]?><h3>
+			<p><?=$array[text]?></p>
+			<?php
+			}
+
+			//echo $_conf['folder']."<br>"; $type
 			if($_conf['folder']){ 
 				$folder='img/'.$_conf['folder'].'/'.$id;
 				if (file_exists($folder)) { ?>
@@ -69,14 +134,10 @@ if($type!=''){
 				<?php }
 			
 			}?>
-						<p><?=$array[text]?></p>
 		<?php 
 
 		if (file_exists($folder) && $_conf['folder']) { 
 			
-			
-			
-					
 					if (file_exists($folder)) {
 					
                         $pics = opendir($folder);
@@ -90,27 +151,49 @@ if($type!=''){
 								?>
 
 
-                           <li class="adrian" style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
+                           <li style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
                          
                     <?php 
 
                             } 
                         }    if($cont!=0){echo '</ul></div>	';}
                     } 
-         }?> 				
-					
+         }
+		?>
 	 </div>
+	 
+	 <?php
+	 $videos = mysql_query("SELECT * FROM videos WHERE id_contents = '".$_GET['id']."' AND id_content_type = '".$_GET['type']."' ") or die (mysql_error());
+		$num = mysql_num_rows($videos);
+
+		if($num!=0){
+        ?>
+		<div class="row">
+		 	<div class="large-12 columns panel radius"><h3>Videos</h3>
+				<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4">
+				<?php
+				while($video = mysql_fetch_assoc($videos)){ 
+				?>
+				    <li>
+				   	    <div class="<?=$video['class']?>" style="display: block;">
+				   			<iframe src="<?=$video['video']?>" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen></iframe>
+				   	    </div>
+				    </li>
+				<?php }?>
+				</ul>
+			</div>
+		</div>
+		<?php }?>
 
 <?php 
 	if ($_conf['sql_menu']){
 		$menus = mysql_query($_conf['sql_menu']) or die (mysql_error()); 
 ?>
-        
 		<div class="large-3 columns ">
 			<h3><?=$_conf['title_menu']?></h3>
 			<ul class="side-nav">
           <?php while ($menu = mysql_fetch_assoc($menus)){?>
-				<li ><a href="<?=DOMINIO.$_conf['link']?>&id=<?=$menu['id']?>"><?=$menu['name']?></a></li>
+				<li ><a style="color:#B38448 !important; font-weight: bold" href="<?=DOMINIO.$_conf['link']?>&id=<?=$menu['id']?>"><?=$menu['name']?></a></li>
 				<li class="divider"></li>
           <?php } ?>
 			 

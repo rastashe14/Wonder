@@ -50,7 +50,7 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 <fieldset>
 	
 	<legend><?=$titleSection?></legend>
-
+	
 	<form action="" method="post" enctype="multipart/form-data" class="custom" data-abide>
 		<div class="row">
 		<div class="name-field large-8 columns">
@@ -103,7 +103,8 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 			<input type="hidden" name="url" id="url" value="<?=$_GET['url']?>" />
 
 				<?php if ($_GET['id']!=''){ ?>	
-				<a href="index.php?type=2&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/><a/>
+				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/><a/>
+				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/video.php"><img src="../img/videoGalery.png"/><a/>
 				<?php } ?>
 		</div>
 	</div>			

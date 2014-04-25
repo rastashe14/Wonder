@@ -10,6 +10,3 @@
 
 	</ul>
 </div>
-<div class="row panel text-center titleIni">
-	Remember to bring socks
-</div>
