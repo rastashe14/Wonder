@@ -10,7 +10,6 @@
 			
 			$sti = $_POST['start_date'].' '.$_POST['start_time'];
 	 		//$ete = $_POST['end_date'].' '.$_POST['end_date'];
-			echo $sti;
 			mysql_query("UPDATE calendar SET 
 						name = '".$_POST['name']."',
 						description = '".$_POST['description']."',

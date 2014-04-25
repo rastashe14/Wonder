@@ -45,20 +45,20 @@
 <fieldset>
 	
 	<legend>CALENDAR</legend>
-	<form action="?url=views/calendar/update.php"  method="post">
+	<form action="?url=views/calendar/update.php" method="post">
 		
 	<div class="row">
 		<div class="name-field large-6 columns">
-						<label>Name: <small>required</small></label>
-						<input type="text" name="name" value="<?=$array['name']?>" required  >
-						<small class="error">Name is required.</small>
+			<label>Name: <small>required</small></label>
+			<input type="text" name="name" value="<?=$array['name']?>" required>
+			<!-- <small class="error">Name is required.</small> -->
 		</div>	
 	</div>
 	<div class="row">
 		<div class="description-field large-6 columns">
 			<label>Description: <small>required</small></label>
 			<textarea name="description" cols="30" rows="10"><?=$array['description']?></textarea>
-			<small class="error">Description is required.</small>
+			<!-- <small class="error">Description is required.</small> -->
 		</div>
 	</div>
 	<div class="row">&nbsp;</div>
@@ -67,13 +67,12 @@
 			<label>Start Date  <small>required</small></label>
 			<div class="date-field large-4 columns">
 				<input type="date" name="start_date" value="<?=$dti[0]?>" required>
-				<small class="error">Start date is required.</small>
+				<!-- <small class="error">Start date is required.</small> -->
 			</div>
 			<div class="large-4 columns" style="float:left">
-				<input type="time" name="start_time" id="start_time" required>
-				<small class="error">Start time is required.</small>
+				<input type="time" name="start_time" id="start_time" value="<?=$dti[1]?>" required>
+				<!-- <small class="error">Start time is required.</small> -->
 			</div>
-			
 		</div>
 	</div>
 	<!-- <div class="row">
@@ -92,8 +91,7 @@
 		<div class="large-6 columns">
 			<label>Location:<small>required</small></label>
 			<input type="text" name="location" value="<?=$array['location']?>" required>
-			<small class="error">End date required.</small>
-		</div>
+			<!-- <small class="error">End date required.</small> -->
 		</div>
     </div>
 
