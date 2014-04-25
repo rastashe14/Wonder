@@ -695,6 +695,102 @@ function draw_calendar($next){
 	return $calendar;
 }
 
+/* draws a calendar */
+function draw_calendar_e($next){
+	
+
+	$month = $next==1?(date('m')==12?1:date('m',mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))):date('m');
+	$year  = $next==1?(date('m')==12?date('Y')+1:date('Y')):date('Y');
+	
+	
+
+	/* draw table */
+	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar rounded">';
+
+	/* table headings */
+	$headings = array('Sun','Mon','Tues','Wednes','Thurs','Fri','Satur');
+	$backMonth= $month==date('m')?'':"onclick='window.location.replace(\"?current=booking\");'";
+	$nextMonth= $month==date('m')?"onclick='window.location.replace(\"?current=booking&next=1\");'":'';
+	$calendar.= '<tr class="calendar-row" >
+					<th '.$backMonth.' > <h3>'.($backMonth==''?'':'<').'</h3></th>
+					<th colspan="5"> <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
+					<th '.$nextMonth.' > <h3>'.($nextMonth==''?'':'>').'</h3></th>';
+	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
+
+	/* days and weeks vars now ... */
+	$running_day = date('w',mktime(0,0,0,$month,1,$year));
+	$days_in_month = date('t',mktime(0,0,0,$month,1,$year));
+	$days_in_this_week = 1;
+	$day_counter = 0;
+	$dates_array = array();
+
+	/* row for week one */
+	$calendar.= '<tr class="calendar-row">';
+
+	/* print "blank" days until the first of the current week */
+	for($x = 0; $x < $running_day; $x++):
+		$calendar.= '<td class="calendar-day-np"> </td>';
+		$days_in_this_week++;
+	endfor;
+	/*
+	List of the reservations for this month, day by day
+	 */
+	$events = mysql_query("SELECT id,DAY(date_ini) as 'day', name FROM calendar WHERE date_ini LIKE '$year-$month%' ORDER BY date_ini ASC");
+	// $reservations = mysql_query("SELECT DAY(date) as 'day', pakage FROM  `reservations` WHERE  `date` LIKE  '$year-$month%' and DAY(date) > ".date("d")." and status=1 ORDER BY date") or die (mysql_error());
+	while ($reserved = mysql_fetch_assoc($events)){
+		$daysReserved[$reserved['day']][]=$reserved['name'].'|'.$reserved['id'];
+	}
+
+	/* keep going with days.... */
+	for($list_day = 1; $list_day <= $days_in_month; $list_day++):
+		$activitiesInDay='';
+	    if(is_array($daysReserved[$list_day]))
+		foreach ($daysReserved[$list_day] as $dayReserved) {
+			$name = explode('|', $dayReserved);
+			$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
+			$activitiesInDay.="<span class='radius label' onclick='$onclick'>".$name[0]."</span><br>";
+
+		}
+
+		//$selectedDay= @in_array($list_day,)?'selected':'';
+	    //$onclick= "onclick='window.location.href=\"?current=events&id\"'";
+		$valid=(date('m')==$month && $list_day <= date('d'))?"calendar-day-np":"calendar-day";
+		$calendar.= "<td class='$valid $selectedDay' $onclick >";
+			/* add in the day number */
+			$calendar.= '<div class="day-number">'.$list_day.'</div>';
+
+			/** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
+			$calendar.= $activitiesInDay;//str_repeat('<p> </p>',2);
+			
+		$calendar.= '</td>';
+		if($running_day == 6):
+			$calendar.= '</tr>';
+			if(($day_counter+1) != $days_in_month):
+				$calendar.= '<tr class="calendar-row">';
+			endif;
+			$running_day = -1;
+			$days_in_this_week = 0;
+		endif;
+		$days_in_this_week++; $running_day++; $day_counter++;
+	endfor;
+
+	/* finish the rest of the days in the week */
+	if($days_in_this_week < 8):
+		for($x = 1; $x <= (8 - $days_in_this_week); $x++):
+			$calendar.= '<td class="calendar-day-np"> </td>';
+		endfor;
+	endif;
+
+	/* final row */
+	$calendar.= '</tr>';
+
+	/* end the table */
+	$calendar.= '</table>';
+	
+	/* all done, return result */
+	return $calendar;
+}
+
 function regex($name){
 	switch($name){
 		case 'youtubelong'	:return '/\bhttps?:\\/\\/((m\\.|www\\.)?(youtube\\.com\\/)(embed\\/|watch\\?(.*&)*(v=))(.{11}).*)\b/i';

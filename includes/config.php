@@ -11,7 +11,7 @@
 	
 	if ($_SERVER['SERVER_NAME']=="www.wonderlandplayground.com" || $_SERVER['SERVER_NAME']=="wonderlandplayground.com"){
 	    $_wuser = "wonderlandpl_db";
-		$_wpass = "6234838";	
+		$_wpass = "7412374123";	
 	    $_wdata = "wonderlandpl_db";
 	    $_wdomi = "http://wonderlandplayground.com/";
 	}else{
@@ -21,6 +21,8 @@
 	    $_wdomi = "http://192.168.1.123/wonder/";
 	}
 	
+
+
 	#Configuración principal del sitio
 	define("DOMINIO", $_wdomi);
 	define("HREF_DEFAULT", "javascript:void(0);");
@@ -97,7 +99,7 @@
 	
 	$_BANNER[1]['src']="img/banner/2.jpg";
 	$_BANNER[1]['url']="?";
-	$_BANNER[1]['caption']="News and Events"; 
+	$_BANNER[1]['caption']="News"; 
 	
 	$_BANNER[2]['src']="img/banner/3.jpg";
 	$_BANNER[2]['url']="?current=subscription";
@@ -105,10 +107,11 @@
 	
 	$_BANNER[3]['src']="img/banner/4.jpg";
 	$_BANNER[3]['url']="?id=9&type=3";
-	$_BANNER[3]['caption']="Mommy & Me Activities"; 
+	$_BANNER[3]['caption']="Mommy & Me Activities";  
 	
-//	$_BANNER[4]['src']="img/banner/5.jpg";
-//	$_BANNER[4]['caption']="..."; 
+	$_BANNER[4]['src']="img/banner/2.jpg";
+	$_BANNER[4]['url']="?current=events";
+	$_BANNER[4]['caption']="Events"; 
 	
 	$_NAME_ON_TOP=false;
 

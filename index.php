@@ -51,6 +51,10 @@
 		include ('views/galery.php');
 	}elseif($_GET['current']=='subscription'){	
 		include ('views/subscription.php');
+	}elseif($_GET['current']=='events'){	
+		include ('views/events.php');
+	}elseif($_GET['current']=='eventsDetails'){	
+		include ('views/eventsDetails.php');
 	}else{
 		include ('views/content.php');
 	}

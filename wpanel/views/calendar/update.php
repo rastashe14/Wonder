@@ -78,7 +78,7 @@
     <td><?=substr($calendars[description],0,40)?>...</td>
     <td><small><?=$calendars[date_ini]?></small></td>
     <!-- <td><small><?=$calendars[date_end]?></small></td> -->
-    <td><?=substr($calendars[location],0,20)?>...</td>
+    <td><?=substr($calendars[location],0,20)?></td>
     <td class="text-center">
 		<a href="?url=views/calendar/calendar.php&id=<?=$calendars[id]?>"><img src="../img/editar.png" width="16" title="Update."  />
 		<a href='#' data-reveal-id='services_<?=$calendars[id]?>'  >	
