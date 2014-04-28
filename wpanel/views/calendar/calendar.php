@@ -57,7 +57,7 @@
 	<div class="row">
 		<div class="description-field large-6 columns">
 			<label>Description: <small>required</small></label>
-			<textarea name="description" cols="30" rows="10"><?=$array['description']?></textarea>
+			<textarea name="description" cols="30" rows="10" required><?=$array['description']?></textarea>
 			<!-- <small class="error">Description is required.</small> -->
 		</div>
 	</div>

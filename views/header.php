@@ -13,7 +13,7 @@
 			<dl class="sub-nav">
 				<?php  foreach($_BANNER as $bannerItem ){?>
 				<dd >
-					<a  href="<?=$bannerItem['url']?>"><?=$bannerItem['caption']?></a>
+					<a  href="<?=$bannerItem['url']?>" style="padding: 0"><?=$bannerItem['caption']?></a>
 
 				</dd>
 

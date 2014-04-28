@@ -54,18 +54,16 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	<form action="" method="post" enctype="multipart/form-data" class="custom" data-abide>
 		<div class="row">
 		<div class="name-field large-8 columns">
-							<label>Name: <small>required</small></label>
-							<input type="text" name="name" value="<?=$array['name']?>" required  >
-							<small class="error">Name is required.</small>
+			<label>Name: <small>required</small></label>
+			<input type="text" name="name" value="<?=$array['name']?>" required  >
+			<small class="error">Name is required.</small>
 		</div>
 
 		<div class="address-field large-8 columns">
-							<label>Summary <small>required</small></label>
-							<textarea required name="resumen"  pattern="[a-zA-Z]+"><?=$array['summary']?></textarea>
-							<small class="error">Summary is required.</small>
+			<label>Summary <small>required</small></label>
+			<textarea required name="resumen" ><?=$array['summary']?></textarea>
+			<small class="error">Summary is required.</small>
 		</div>	
-
-
 
 		<div class="twitter-field large-12 columns">	
 			<label>Description: <small>required</small></label>
@@ -104,8 +102,9 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 
 				<?php if ($_GET['id']!=''){ ?>	
 				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/><a/>
+				<?php if($_GET['type']!=1){?>
 				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/video.php"><img src="../img/videoGalery.png"/><a/>
-				<?php } ?>
+				<?php } } ?>
 		</div>
 	</div>			
 	</form>

@@ -86,77 +86,11 @@
 	<div class="large-12 columns ">	
 	<?php
 	if($_GET['date']==''&&$_GET['pakage']==''){
-		echo "<h3>Select a date <small>(Step 1 of 3)</small></h3>";
+		echo "<h3>Select a event </h3>";
 		
 		
 		
 		echo draw_calendar_e($_GET['next']);
-	}	
-	
-	if($_GET['date']!=''&&$_GET['pakage']==''){
-		echo "<h3>Select a Pakage <small>(Step 2 of 3)</small></h3>";
-		
-		?>
-		<div class="row">
-			<ul class="inline-list">
-				
-				<li class="label secondary radius" >Date: <em><?=  str_replace("-","/",$_GET['date'])?></em> <a class=" button radius tiny" href="?current=booking">Change</a></li>
-				
-			</ul>
-			 
-			
-		</div>
-		<div class="row">
-			<ul class="small-block-grid-3">
-			<?php
-			$date=explode("-",$_GET['date']);
-			
-			$price=date("N", mktime(0, 0, 0, $date[0],$date[1], $date[2]))>4?2:'';
-			
-			
-			$packages = mysql_query("SELECT id, name, price$price, des, city, maxchi FROM package where id_status = '1' ORDER BY price") or die (mysql_error());
-
-				
-
-				while ($package = mysql_fetch_assoc($packages)){
-
-					
-					$facility_type=mysql_query("SELECT id, name FROM type_facilities WHERE id_status='1'")or die(mysql_error());
-					$_facilities='';
-					while ($_type = mysql_fetch_assoc($facility_type)){
-
-						$facilities=mysql_query("SELECT fp.id_faci FROM package_facilities fp inner join facilities f on f.id= fp.id_faci WHERE fp.id_pack='".$package["id"]."' and f.id_type='".$_type["id"]."'")or die(mysql_error());
-						
-						$_cont=0;	
-						while ($_facility = mysql_fetch_assoc($facilities)){
-							$_facilities.=$_cont==0?"<br>*".$_type["name"].' (':'';
-							$_facilities.=campo("facilities","id", $_facility["id_faci"], "name").", ";
-							$_cont++;
-						}
-						$_facilities=$_cont!=0?rtrim($_facilities,", ").")":'';
-					}	
-
-			?>
-
-			<li >
-				<ul class="pricing-table">
-					<li class="title"><?=  ucfirst($package['name']) ?></li>
-					<li class="price">$<?= $package["price$price"]?></li>
-					<li class="description"><?=$package['des']?></li>
-					<li class="bullet-item">City: <em><?=ucfirst($package['city'])?></em> , Children allowed: <em><?=$package['maxchi']?></em></li>
-		 			<?php if ($_facilities!='') {?>
-		 			<li class="bullet-item">Facilities: <?=$_facilities?></li>
-		 			<?php }?>
-	<!--				<li class="bullet-item">20 Users</li>-->
-					<li class="cta-button"><a class="button radius" href="?current=booking&date=<?=$_GET['date']?>&pakage=<?=$package['id']?>">Book Now</a></li>
-				</ul>
-			</li>
-			<?php		
-				}//type_facilities	
-			?>
-			</ul>
-		</div>
-		<?php	
 	}	
 	
 	if($_GET['date']!=''&&$_GET['pakage']!=''){

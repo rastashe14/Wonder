@@ -4,7 +4,7 @@
 			<img src="../img/logo.png" />
 		</div>
 	
-	<div class="small-8 small-centered columns panel">
+	<div class="small-8 small-centered columns panel" style="float: none">
 		<form name="login" id="login" method="post" action="includes/login.php" data-abide >
 			
 			<div class="user-field">

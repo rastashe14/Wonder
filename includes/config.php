@@ -109,7 +109,7 @@
 	$_BANNER[3]['url']="?id=9&type=3";
 	$_BANNER[3]['caption']="Mommy & Me Activities";  
 	
-	$_BANNER[4]['src']="img/banner/2.jpg";
+	$_BANNER[4]['src']="img/banner/6.jpg";
 	$_BANNER[4]['url']="?current=events";
 	$_BANNER[4]['caption']="Events"; 
 	

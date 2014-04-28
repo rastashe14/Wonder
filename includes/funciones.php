@@ -709,8 +709,8 @@ function draw_calendar_e($next){
 
 	/* table headings */
 	$headings = array('Sun','Mon','Tues','Wednes','Thurs','Fri','Satur');
-	$backMonth= $month==date('m')?'':"onclick='window.location.replace(\"?current=booking\");'";
-	$nextMonth= $month==date('m')?"onclick='window.location.replace(\"?current=booking&next=1\");'":'';
+	$backMonth= $month==date('m')?'':"onclick='window.location.replace(\"?current=events\");'";
+	$nextMonth= $month==date('m')?"onclick='window.location.replace(\"?current=events&next=1\");'":'';
 	$calendar.= '<tr class="calendar-row" >
 					<th '.$backMonth.' > <h3>'.($backMonth==''?'':'<').'</h3></th>
 					<th colspan="5"> <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
@@ -735,10 +735,10 @@ function draw_calendar_e($next){
 	/*
 	List of the reservations for this month, day by day
 	 */
-	$events = mysql_query("SELECT id,DAY(date_ini) as 'day', name FROM calendar WHERE date_ini LIKE '$year-$month%' ORDER BY date_ini ASC");
+	$events = mysql_query("SELECT id,DAY(date_ini) as 'day',MONTH(date_ini) as 'month',YEAR(date_ini) as 'year', date_ini, name FROM calendar WHERE date_ini LIKE '$year-$month%' ORDER BY date_ini ASC");
 	// $reservations = mysql_query("SELECT DAY(date) as 'day', pakage FROM  `reservations` WHERE  `date` LIKE  '$year-$month%' and DAY(date) > ".date("d")." and status=1 ORDER BY date") or die (mysql_error());
 	while ($reserved = mysql_fetch_assoc($events)){
-		$daysReserved[$reserved['day']][]=$reserved['name'].'|'.$reserved['id'];
+		$daysReserved[$reserved['day']][]=$reserved['name'].'|'.$reserved['id'].'|'.$reserved['date_ini'];
 	}
 
 	/* keep going with days.... */
@@ -746,18 +746,30 @@ function draw_calendar_e($next){
 		$activitiesInDay='';
 	    if(is_array($daysReserved[$list_day]))
 		foreach ($daysReserved[$list_day] as $dayReserved) {
-			$name = explode('|', $dayReserved);
-			$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
-			$activitiesInDay.="<span class='radius label' onclick='$onclick'>".$name[0]."</span><br>";
 
+			$name = explode('|', $dayReserved);
+			if(strlen($name[0])>14){
+				$nameCount = substr($name[0],0,12).'...';
+			}else{
+				$nameCount = $name[0];
+			}
+
+			if (($name['2']) >= (date("Y-m-d H:i:s"))) {
+				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
+				$activitiesInDay.="<span title='New events' class='radius label' style='cursor:pointer' $onclick>".$nameCount."</span><br>";
+			}else{
+				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
+				$activitiesInDay.="<span title='Past events' class='radius label' style='cursor:pointer; background-color: #BA6100' $onclick>".$nameCount."</span><br>";
+			}
 		}
 
 		//$selectedDay= @in_array($list_day,)?'selected':'';
 	    //$onclick= "onclick='window.location.href=\"?current=events&id\"'";
 		$valid=(date('m')==$month && $list_day <= date('d'))?"calendar-day-np":"calendar-day";
-		$calendar.= "<td class='$valid $selectedDay' $onclick >";
+		$back=(date('m')==$month && $list_day <= date('d'))?"":"style='background:#FFF; cursor:default'";
+		$calendar.= "<td class='$valid $selectedDay' $back >";
 			/* add in the day number */
-			$calendar.= '<div class="day-number">'.$list_day.'</div>';
+			$calendar.= '<div class="day-number" >'.$list_day.'</div>';
 
 			/** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
 			$calendar.= $activitiesInDay;//str_repeat('<p> </p>',2);

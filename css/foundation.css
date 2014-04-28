@@ -2487,6 +2487,10 @@ div.switch {
     [data-magellan-expedition] .sub-nav a, [data-magellan-expedition-clone] .sub-nav a {
       line-height: 1.8em; }
 
+/*.orbit-container .orbit-slides-container ul li{
+  position: relative;
+}*/
+
 .tabs {
   *zoom: 1;
   margin-bottom: 0 !important; }

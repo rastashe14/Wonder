@@ -52,7 +52,6 @@ if($type!=''){
 				
 				$query = mysql_query($_conf['sql']) or die (mysql_error());
 				$array = mysql_fetch_assoc($query);
-				
 			
 				
 if($id=="home"){				
@@ -63,100 +62,57 @@ if($id=="home"){
 <?php } ?>
 <div class="row panel " > 
        <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns ">
-       <?php if($type==1&&$id=='home'){
-       	$newsB = mysql_query($_conf['sql_menu']) or die (mysql_error());
-       	$news = mysql_fetch_assoc($newsB);
-       	?>
-		<div class="row" >
-       		<ul data-orbit data-options="timer_speed: 3000; animation_speed: 1000; pause_on_hover: false;">
-	       		<?php  
-				$newsB = mysql_query($_conf['sql_menu']) or die (mysql_error());
-			
-				while($news = mysql_fetch_assoc($newsB)){ 
+       <?php if($type==1&&$id=='home'){ ?>
+       		<ul data-orbit data-options="timer_speed: 3500; animation_speed: 1500; pause_on_hover: false;">
+	       		<?php 
+	       		$query = mysql_query($_conf['sql_menu']) or die (mysql_error());
+				while($news = mysql_fetch_assoc($query)){
 				?>
-				<li ><p>&nbsp;</p>
-					<h3><?=$news[name]?></h3>
-					<h1><?=$news[text]?></h1>
-					<?php
-						if($_conf['folder']){ 
-							$folder='img/'.$_conf['folder'].'/'.$news['id'];
-							if (file_exists($folder)) { ?>
-			<!--				<h4><a href="#galery" >View Gallery</a></h4>-->
-							<?php }
-						
-						}
-						if (file_exists($folder) && $_conf['folder']) { 
-						
-								if (file_exists($folder)) {
-								
-			                        $pics = opendir($folder);
-			                        $cont=0;
-			                        while ($pic = readdir($pics)){
-			                            if ($pic != "." && $pic != ".."&& $pic != ".svn" && $pic != "Thumbs.db" && trim($pic, ' ') != '' && $pic!='index.html' && $pic!='' && $pic!='.DS_Store' && $pic!='_notes'){  
-			                    
-											if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
-											$cont++;
-											if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
-											?>
-
-			                           <li style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
-			                         
-			                    <?php 
-
-			                            } 
-			                        }    if($cont!=0){echo '</ul></div>	';}
-			                    } 
-			         }
-			         ?>
-					
+				<li>
+					<div style="padding: 0 40px">
+					   <p>&nbsp;</p>
+					   <h3>
+					   <a style="color:#ff810a !important;" href="<?=DOMINIO.$_conf['link']?>&id=<?=$news['id']?>"><?=$news[name]?></a>
+					   </h3>
+					   <p style="color: #868585 !important;padding: 10px 0 0 15px;"><?=$news[summary]?></p>
+					</div>
 				</li>
-				<?php }?>
+				<?php } ?>
 			</ul>
-		</div>
-	   <?php }elseif($type==1&&$id!='home'){?>
-
+	    <?php }else{?>
 			<h3><?=$array[name]?><h3>
 			<p><?=$array[text]?></p>
-			<?php }else{
-				?>
+		<?php
+		}
 
-			<h3><?=$array[name]?><h3>
-			<p><?=$array[text]?></p>
-			<?php
-			}
-
-			//echo $_conf['folder']."<br>"; $type
-			if($_conf['folder']){ 
-				$folder='img/'.$_conf['folder'].'/'.$id;
-				if (file_exists($folder)) { ?>
+		//echo $_conf['folder']."<br>"; $type
+		if($_conf['folder']){ 
+			$folder='img/'.$_conf['folder'].'/'.$id;
+			if (file_exists($folder)) { ?>
 <!--				<h4><a href="#galery" >View Gallery</a></h4>-->
-				<?php }
-			
-			}?>
-		<?php 
+			<?php }
+		}
 
 		if (file_exists($folder) && $_conf['folder']) { 
 			
-					if (file_exists($folder)) {
-					
-                        $pics = opendir($folder);
-                        $cont=0;
-                        while ($pic = readdir($pics)){
-                            if ($pic != "." && $pic != ".."&& $pic != ".svn" && $pic != "Thumbs.db" && trim($pic, ' ') != '' && $pic!='index.html' && $pic!='' && $pic!='.DS_Store' && $pic!='_notes'){  
-                    
-								if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
-								$cont++;
-								if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
-								?>
+			if (file_exists($folder)) {
+			
+                $pics = opendir($folder);
+                $cont=0;
+                while ($pic = readdir($pics)){
+                    if ($pic != "." && $pic != ".."&& $pic != ".svn" && $pic != "Thumbs.db" && trim($pic, ' ') != '' && $pic!='index.html' && $pic!='' && $pic!='.DS_Store' && $pic!='_notes'){  
+            
+						if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
+						$cont++;
+						if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
+						?>
 
-
-                           <li style="width:210px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
-                         
-                    <?php 
-
-                            } 
-                        }    if($cont!=0){echo '</ul></div>	';}
+                   <li style="width:200px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
+            		<?php 
                     } 
+                }    
+                if($cont!=0){echo '</ul></div>	';}
+            } 
          }
 		?>
 	 </div>
@@ -209,3 +165,9 @@ if($id=="home"){
 	 
  }
 ?>
+
+ <script>
+// 	function
+
+// 	$('.orbit-bullets-container').hide();
+</script>
