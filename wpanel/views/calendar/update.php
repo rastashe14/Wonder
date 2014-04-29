@@ -65,7 +65,7 @@
 	<tr >
 		<th>Name</th>
 		<th width="250">Description</th>
-		<th width="100">Start Date</th>
+		<th width="100">Date Time</th>
 		<!-- <th width="100">End Date</th> -->
 		<th width="140">Location</th>
 		<th width="100">Actions</th>
