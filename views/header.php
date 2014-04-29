@@ -11,10 +11,12 @@
 			
 			<?php }?>
 			<dl class="sub-nav">
-				<?php  foreach($_BANNER as $bannerItem ){?>
+				<?php  $c = count($_BANNER);
+					   $cont=0;
+				foreach($_BANNER as $bannerItem ){ $cont++;?>
 				<dd >
-					<a  href="<?=$bannerItem['url']?>" style="padding: 0"><?=$bannerItem['caption']?></a>
-
+					<a  href="<?=$bannerItem['url']?>" style="padding: 0;margin-right: 5px;margin-left: -5px; font-size: 12px"><?=$bannerItem['caption']?></a>
+					<?php if($c!=$cont){ echo '-';}?>
 				</dd>
 
 				<?php  }?>

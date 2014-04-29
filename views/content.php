@@ -74,7 +74,7 @@ if($id=="home"){
 					   <h3>
 					   <a style="color:#ff810a !important;" href="<?=DOMINIO.$_conf['link']?>&id=<?=$news['id']?>"><?=$news[name]?></a>
 					   </h3>
-					   <p style="color: #868585 !important;padding: 10px 0 0 15px;"><?=$news[summary]?></p>
+					   <p style="color: #868585 !important;padding: 10px 0 0 15px;font-size: 17px !important;"><?=$news[summary]?></p>
 					</div>
 				</li>
 				<?php } ?>

@@ -738,29 +738,35 @@ function draw_calendar_e($next){
 	$events = mysql_query("SELECT id,DAY(date_ini) as 'day',MONTH(date_ini) as 'month',YEAR(date_ini) as 'year', date_ini, name FROM calendar WHERE date_ini LIKE '$year-$month%' ORDER BY date_ini ASC");
 	// $reservations = mysql_query("SELECT DAY(date) as 'day', pakage FROM  `reservations` WHERE  `date` LIKE  '$year-$month%' and DAY(date) > ".date("d")." and status=1 ORDER BY date") or die (mysql_error());
 	while ($reserved = mysql_fetch_assoc($events)){
-		$daysReserved[$reserved['day']][]=$reserved['name'].'|'.$reserved['id'].'|'.$reserved['date_ini'];
+		$daysReserved[$reserved['day']][]=$reserved['name'].'|'.$reserved['id'].'|'.$reserved['date_ini'].'|'.$reserved['day'];
 	}
 
 	/* keep going with days.... */
 	for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-		$activitiesInDay='';
+		$activitiesInDay='';$a=0;
 	    if(is_array($daysReserved[$list_day]))
-		foreach ($daysReserved[$list_day] as $dayReserved) {
+		foreach ($daysReserved[$list_day] as $dayReserved) { $a++;
 
 			$name = explode('|', $dayReserved);
-			if(strlen($name[0])>14){
-				$nameCount = substr($name[0],0,12).'...';
+			if(strlen($name[0])>12){
+				$nameCount = substr($name[0],0,10).'...';
 			}else{
 				$nameCount = $name[0];
 			}
-
+                        
+                        if($name['3']==$list_day){
+                            $scrolli='div id="scbar"';
+                            $class='class="scrollbar"';
+                            $scrolle='</div>';
+                        }
+                                
 			if (($name['2']) >= (date("Y-m-d H:i:s"))) {
 				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
-				$activitiesInDay.="<span title='New events' class='radius label' style='cursor:pointer' $onclick>".$nameCount."</span><br>";
+				$activitiesInDay.="<span title='New events' class='radius label' style='cursor:pointer;margin: 3px 0;' $onclick>".$nameCount."</span><br>";
 			}else{
 				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
-				$activitiesInDay.="<span title='Past events' class='radius label' style='cursor:pointer; background-color: #BA6100' $onclick>".$nameCount."</span><br>";
-			}
+				$activitiesInDay.="<span title='Past events' class='radius label' style='cursor:pointer;margin: 3px 0; background-color: #BA6100' $onclick>".$nameCount."</span><br>";
+			} 
 		}
 
 		//$selectedDay= @in_array($list_day,)?'selected':'';
@@ -770,10 +776,10 @@ function draw_calendar_e($next){
 		$calendar.= "<td class='$valid $selectedDay' $back >";
 			/* add in the day number */
 			$calendar.= '<div class="day-number" >'.$list_day.'</div>';
-
+                        $calendar.= ($a>1)?"<".$scrolli." ".$class.">":''; 
 			/** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
 			$calendar.= $activitiesInDay;//str_repeat('<p> </p>',2);
-			
+			$calendar.= $scrolle?$scrolle:'';
 		$calendar.= '</td>';
 		if($running_day == 6):
 			$calendar.= '</tr>';
