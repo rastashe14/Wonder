@@ -93,21 +93,18 @@ if($_GET['type']=="video"){
 	   	    <div class="<?=$video['class']?> th" style="display: block;">
 	   			<iframe src="<?=$video['video']?>" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen></iframe>
 	   	    </div>
-	   	    <a href="hola" data-reveal-id="<?=$video['id']?>Modal" data-reveal>Delete video</a>
-	   	    <div id='<?=$video['id']?>Modal' class='reveal-modal small' data-reveal>
+
+	   	   <a href="#" data-reveal-id="Modal<?=$video['id']?>">Delete video</a>
+
+	   	    <div id="Modal<?=$video['id']?>" class="reveal-modal small" data-reveal>
 				<h3><small>Are you sure to delete this video?</small></h3>
 				<a href='<?=$url.'&del&idv='.$video['id']?>' class='small radius button'>Yes</a>
-				<a class='close-reveal-modal'>x</a>
+				<a class='close-reveal-modal'>&#215;</a>
 			</div>
+
 		</li>
 	<?php }?>
 	</ul>
-	</div>
-	<div id="myModal" class="reveal-modal" data-reveal>
-	  <h2>Awesome. I have it.</h2>
-	  <p class="lead">Your couch.  It is mine.</p>
-	  <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
-	  <a class="close-reveal-modal">&#215;</a>
 	</div>
 </div>
 <?php
@@ -116,17 +113,11 @@ if($_GET['type']=="video"){
 	mensajes("Alert!","Sorry this content can't be loaded"); 
  }
 ?>
-<script type="text/javascript">
-$(document).foundation({
-	$('#send').addEvent('click', function(){
-		Alert('2');
-	});
-});
-	
-
-	
-
-	if(URL.match(/^https?:\/\/vimeo\.com\/.+\/.+/)){
+<script  type="text/javascript">
+$('#txtVideo').bind('change keyup',function(){
+		var that=this,URL=that.value;
+		console.log(URL);
+		if(URL.match(/^https?:\/\/vimeo\.com\/.+\/.+/)){
 			var $running=$('#vimeo #running'),
 				$success=$('#vimeo #success'),
 				$error=$('#vimeo #error');
@@ -164,4 +155,5 @@ $(document).foundation({
 				}
 			});
 		}
+	}).trigger('change');
 </script>

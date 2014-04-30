@@ -35,7 +35,12 @@
   <link rel="stylesheet" href="../css/style.css">
 
   <script src="../js/vendor/custom.modernizr.js"></script>
-
+  <script src="../js/jquery.js"></script>
+  
+  <script src="../js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </head>
 	
 <body>

@@ -40,31 +40,21 @@
 				<ul class="dropdown">
 					<li><a href="index.php?url=views/pakages/add.php">Add</a></li>
 					<li><a href="index.php?url=views/pakages/update.php">Update</a></li>
-
-					
 					<li class="divider"></li>
-					
 					<li class="has-dropdown">
-						
 						<a href="#">Facilities</a>
-						
 						<ul class="dropdown">
 							<li><a href="index.php?url=views/facilities/add.php">Add</a></li>
 							<li><a href="index.php?url=views/facilities/update.php">Update</a></li>
 						</ul>
-						
 					</li>
 					<li class="divider"></li>
-					
 					<li class="has-dropdown">
-						
 						<a href="#">Type Facilities</a>
-						
 						<ul class="dropdown">
 							<li><a href="index.php?url=views/type_faci/add.php">Add</a></li>
 							<li><a href="index.php?url=views/type_faci/update.php">Update</a></li>
 						</ul>
-						
 					</li>
 				</ul>
 			</li>
@@ -97,8 +87,6 @@
 		<ul class="right" >
 			<li class="divider"></li>
 			<li ><a href="includes/logout.php">Logout</a></li>
-		</ul>	
-
-		
+		</ul>
 	</section>
 </nav>

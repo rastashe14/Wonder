@@ -267,9 +267,12 @@ td.calendar-day, td.calendar-day-np {
 .scrollbar{ overflow: scroll;overflow-x: hidden;height:50px}
 #scbar::-webkit-scrollbar{
     width:10px;
-    background-color:#eee;    
-}
+    background-color:#eee;
 
+}
+.scrollbar{
+  -moz-appearance: none !important;
+ }
 #scbar::-webkit-scrollbar-thumb{
 background-color:#CCCBC9;
 border-radius:10px;

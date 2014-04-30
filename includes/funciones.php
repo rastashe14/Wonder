@@ -492,7 +492,7 @@ function redimensionar($img_original, $img_nueva,$img_nueva_anchura,$img_nueva_a
 	
 	$type=Array(1 => 'gif', 2 => 'jpg', 3 => 'png');
 	
-	list($imgWidth,$imgHeight,$tipo,$imgAttr)=getimagesize($img_original);
+	list($imgWidth,$imgHeight,$tipo,$imgAttr)=@getimagesize($img_original);
 	$type=$type[$tipo];
 
 	switch($type){
