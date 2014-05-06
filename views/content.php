@@ -61,9 +61,9 @@ if($id=="home"){
 </div>
 <?php } ?>
 <div class="row panel " > 
-       <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns ">
+       <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns " id="newsOrbit">
        <?php if($type==1&&$id=='home'){ ?>
-       		<ul data-orbit data-options="timer_speed: 8000; animation_speed: 4000; pause_on_hover: false;">
+       		<ul data-orbit data-options="timer_speed: 8000">
 	       		<?php 
 	       		$query = mysql_query($_conf['sql_menu']) or die (mysql_error());
 				while($news = mysql_fetch_assoc($query)){
@@ -76,10 +76,49 @@ if($id=="home"){
 					   </h3>
 					   <p style="color: #868585 !important;padding: 10px 0 0 15px;font-size: 17px !important;"><?=$news[summary]?></p>
 					</div>
+					<?php 
+					if($_conf['folder']){ 
+						$folder='img/'.$_conf['folder'].'/'.$news['id'];
+					}
+					$cant=0;
+					if (file_exists($folder) && $_conf['folder']) { 
+						
+						if (file_exists($folder)) {
+							
+			                $pics = opendir($folder);
+			                $cont=0;
+			                while ($pic = readdir($pics)){ 
+			                	
+			                    if ($pic != "." && $pic != ".."&& $pic != ".svn" && $pic != "Thumbs.db" && trim($pic, ' ') != '' && $pic!='index.html' && $pic!='' && $pic!='.DS_Store' && $pic!='_notes'){  
+			            
+									$cont++;
+									if($cont==1){
+										echo '<div class="large-12 columns panel radius ">'; 
+									}
+									if($cant<3){ 
+										$idModal = explode('.',$pic);
+										?>
+	                 					<div data-reveal-id="myModal<?=$idModal[0]?>" style="width:200px; height:140px; margin:3px; display: inline-block;cursor:pointer">
+	                    				<img style="height: 140px;" src="includes/imagen.php?tipo=2&ancho=180&alto=140&img=../<?=$folder."/".$pic?>"></div>
+	                  					<div id="myModal<?=$idModal[0]?>" class="reveal-modal medium" data-reveal>
+								  			<img src="includes/imagen.php?tipo=3&ancho=350&img=../<?=$folder."/".$pic?>" style="margin-left: 150px;">
+				 					  		<a class="close-reveal-modal">&#215;</a>
+				 						</div>
+		             					<?php 
+		             					$cant++; 
+		            				}
+			                    } 
+			                }      
+			                if($cont!=0){echo '</div>	';}
+			            } 
+			         }
+					?>
 				</li>
 				<?php } ?>
 			</ul>
-	    <?php }else{?>
+	    <?php  
+	    	
+	    }else{?>
 			<h3><?=$array[name]?><h3>
 			<p><?=$array[text]?></p>
 		<?php
@@ -104,7 +143,7 @@ if($id=="home"){
             
 						if($_conf['folder']=='locations/')$data_caption=campo("location_pic_detail", "img", $pic, "description");
 						$cont++;
-						if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs " data-clearing>'; }
+						if($cont==1){echo '<div class="large-12 columns panel radius "><h3>Gallery</h3><ul class="clearing-thumbs" data-clearing>'; }
 						?>
 
                    <li style="width:200px; height:140px; margin:3px; overflow-y:hidden; "><a href="<?=$folder."/".$pic?>" ><img data-caption="<?=$data_caption?>" src="includes/imagen.php?tipo=3&ancho=210&img=../<?=$folder."/".$pic?>"></a></li>
@@ -164,10 +203,6 @@ if($id=="home"){
 	mensajes("Alert!","Sorry this content can't be loaded"); 
 	 
  }
+					
 ?>
 
- <script>
-// 	function
-
-// 	$('.orbit-bullets-container').hide();
-</script>

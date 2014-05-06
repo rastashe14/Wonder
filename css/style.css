@@ -320,3 +320,13 @@ box-shadow: 0 0 6px gray inset;
 	padding-left: 5px;
 	width: 90px !important;
 }
+#newsOrbit #thumbsNews{
+	margin-left: -185px;
+}
+#newsOrbit #thumbsNews li{
+	position: relative;
+}
+
+/*
+#newsOrbit .orbit-container .orbit-slides-container #thumbsNews li img {display: inline-block;
+vertical-align: middle}*/

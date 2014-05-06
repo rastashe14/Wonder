@@ -4,20 +4,20 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	 $content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
 	 $content_type = mysql_fetch_assoc($content_type);
 	 
-     if ($_POST['sumito']=="si" && $_POST['id']==''){ //insert
+     if ($_POST['id']==''){ //insert
 		 //_imprimir($_POST);
 
 				mysql_query("INSERT INTO contents SET 
 									id_status = '".$_POST['status']."',
 									name = '".$_POST['name']."',
-									summary = '".$_POST['resumen']."',
+									summary = '".utf8_encode($_POST['resumen'])."',
 									text = '".$_POST['des']."',
 									id_type = '".$_GET['type']."'	
 							") or die (mysql_error());
 				
 				mensajes("Info","Process Successfully.");	
 			
-	 }elseif ($_POST[sumito]=="si" && $_POST['id']!=''){ //update
+	 }elseif ($_POST['id']!=''){ //update
 
 			mysql_query("UPDATE contents SET 
 							id_status = '".$_POST['status']."',
@@ -86,12 +86,9 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 
 		</div>
 
-
-
 		<div class="large-12 columns">
 			<button type="submit">Submit</button>
-			<input name="sumito" type="hidden" id="sumito" value="si" />
-			<input type="hidden" name="id" id="id" value="<?=$_GET['id']?>" />
+			<input type="hidden" name="id" id="id" value="<?=$_GET['id']?>"/>
 			<input type="hidden" name="url" id="url" value="<?=$_GET['url']?>" />
 
 				<?php if ($_GET['id']!=''){ ?>	
