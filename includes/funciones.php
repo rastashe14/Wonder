@@ -680,12 +680,12 @@ function draw_calendar($next){
 	$month = explode("|",get_month_wonder($next));
 
 	//mes anterior
-	$firstm = $month[2];//frena el calendario en enero del ano presente
+	$firstm = $next?$month[2]:date('m');//frena el calendario en enero del ano presente
 	$beforeD = $month[2]?$month[2]:date('m')-1;
 	$beforeM = $month[0]?$month[0]:date('F',mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
 
 	//mes siguiente
-	$lastm = $month[3];//frena el calendario en diciembre del ano presente
+	$lastm = $next?$month[3]:date('m');//frena el calendario en diciembre del ano presente
 	$nextD = $month[3]?$month[3]:date('m')+1;
 	$nextM = $month[1]?$month[1]:date('F',mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
 
@@ -789,10 +789,12 @@ function draw_calendar_e($next){
 	$month = explode("|",get_month_wonder($next));
 
 	//mes anterior
+	$firstm = $next?$month[2]:date('m');//frena el calendario en enero del ano presente
 	$beforeD = $month[2]?$month[2]:date('m')-1;
 	$beforeM = $month[0]?$month[0]:date('F',mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
 
 	//mes siguiente
+	$lastm = $next?$month[3]:date('m');//frena el calendario en diciembre del ano presente
 	$nextD = $month[3]?$month[3]:date('m')+1;
 	$nextM = $month[1]?$month[1]:date('F',mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
 
@@ -804,8 +806,8 @@ function draw_calendar_e($next){
 	/* table headings */
 	$headings = array('Sun','Mon','Tues','Wednes','Thurs','Fri','Satur');
 
-	$backMonth= "onclick='window.location.replace(\"?current=events&next=".$beforeD."\");'";
-	$nextMonth= "onclick='window.location.replace(\"?current=events&next=".$nextD."\");'";
+	$backMonth= $firstm!=''?"onclick='window.location.replace(\"?current=events&next=".$beforeD."\");'":"";
+	$nextMonth= $lastm!=''?"onclick='window.location.replace(\"?current=events&next=".$nextD."\");'":"";
 
 	$calendar.= '<tr class="calendar-row" >
 				   <th '.$backMonth.' > <h3 style="cursor: pointer">'.($backMonth==''?'':'<').'</h3></th>
