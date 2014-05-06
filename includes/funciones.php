@@ -598,26 +598,109 @@ function deleteDir($dir, $borrarme)
     }
 }
  
+ function get_month_wonder($next){
+	if ($next!='') {
+		switch ($next) {
+			case '01': 
+				$mespos = 2;
+				$mesact = '01';
+				//$mesant = 12;
+			break;
+			case '02': 
+				$mespos = 3;
+				$mesact = '02';
+				$mesant = 1;
+			break;
+			case '03': 
+				$mespos = 4;
+				$mesact = '03';
+				$mesant = 2;
+			break;
+			case '04': 
+				$mespos = 5;
+				$mesact = '04'; 
+				$mesant = 3;
+			break;
+			case '05': 
+				$mespos = 6;
+				$mesact = '05';
+				$mesant = 4;
+			break;
+			case '06': 
+				$mespos = 7;
+				$mesact = '06';
+				$mesant = 5;
+			break;
+			case '07': 
+				$mespos = 8;
+				$mesact = '07';
+				$mesant = 6;
+			break;
+			case '08': 
+				$mespos = 9;
+				$mesact = '08';
+				$mesant = 7;
+			break;
+			case '09': 
+				$mespos = 10;
+				$mesact = '09';
+				$mesant = 8;
+			break;
+			case '10': 
+				$mespos = 11;
+				$mesact = '10';
+				$mesant = 9;
+			break;
+			case '11': 
+				$mespos = 12;
+				$mesact = '11';
+				$mesant = 10;
+			break;
+			case '12': 
+				//$mespos = 1;
+				$mesact = '12';
+				$mesant = 11;
+			break;
+		}
+		$mesSi = date('F',mktime(0, 0, 0, $mespos, date("d"), date("Y"))); 
+		$mesAn = date('F',mktime(0, 0, 0, $mesant, date("d"), date("Y")));
+
+		return $mesAn.'|'.$mesSi.'|'.$mesant.'|'.$mespos.'|'.$mesact;
+	}
+}
+
 /* draws a calendar */
 function draw_calendar($next){
 	
 
-	$month = $next==1?(date('m')==12?1:date('m',mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))):date('m');
-	$year  = $next==1?(date('m')==12?date('Y')+1:date('Y')):date('Y');
-	
-	
+	// $month = $next==1?(date('m')==12?1:date('m',mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))):date('m');
+	//$year  = date('Y');
 
+	$year  = $next==1?(date('m')==12?date('Y')+1:date('Y')):date('Y');
+	$month = explode("|",get_month_wonder($next));
+
+	//mes anterior
+	$firstm = $month[2];//frena el calendario en enero del ano presente
+	$beforeD = $month[2]?$month[2]:date('m')-1;
+	$beforeM = $month[0]?$month[0]:date('F',mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
+
+	//mes siguiente
+	$lastm = $month[3];//frena el calendario en diciembre del ano presente
+	$nextD = $month[3]?$month[3]:date('m')+1;
+	$nextM = $month[1]?$month[1]:date('F',mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
+
+	$month = $month[4]?$month[4]:date('m');
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar rounded">';
 
 	/* table headings */
 	$headings = array('Sun','Mon','Tues','Wednes','Thurs','Fri','Satur');
-	$backMonth= $month==date('m')?'':"onclick='window.location.replace(\"?current=booking\");'";
-	$nextMonth= $month==date('m')?"onclick='window.location.replace(\"?current=booking&next=1\");'":'';
+	$backMonth= $firstm!=''?"onclick='window.location.replace(\"?current=booking&next=".$beforeD."\");'":"";
+	$nextMonth= $lastm!=''?"onclick='window.location.replace(\"?current=booking&next=".$nextD."\");'":"";
 	$calendar.= '<tr class="calendar-row" >
-					<th '.$backMonth.' > <h3>'.($backMonth==''?'':'<').'</h3></th>
-					<th colspan="5"> <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
-					<th '.$nextMonth.' > <h3>'.($nextMonth==''?'':'>').'</h3></th>';
+				   <th '.$backMonth.' > <h3 style="cursor: pointer">'.($backMonth==''?'':'<').'</h3></th>
+				   <th colspan="5">  <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
+				   <th '.$nextMonth.' > <h3 style="cursor: pointer">'.($nextMonth==''?'':'>').'</h3></th>';
 	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 
 	/* days and weeks vars now ... */
@@ -699,22 +782,35 @@ function draw_calendar($next){
 function draw_calendar_e($next){
 	
 
-	$month = $next==1?(date('m')==12?1:date('m',mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))):date('m');
+	// $month = $next==1?(date('m')==12?1:date('m',mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))):date('m');
+	// $year  = $next==1?(date('m')==12?date('Y')+1:date('Y')):date('Y');
+	
 	$year  = $next==1?(date('m')==12?date('Y')+1:date('Y')):date('Y');
-	
-	
+	$month = explode("|",get_month_wonder($next));
+
+	//mes anterior
+	$beforeD = $month[2]?$month[2]:date('m')-1;
+	$beforeM = $month[0]?$month[0]:date('F',mktime(0, 0, 0, date("m")-1, date("d"), date("Y")));
+
+	//mes siguiente
+	$nextD = $month[3]?$month[3]:date('m')+1;
+	$nextM = $month[1]?$month[1]:date('F',mktime(0, 0, 0, date("m")+1, date("d"), date("Y")));
+
+	$month = $month[4]?$month[4]:date('m');
 
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar rounded">';
 
 	/* table headings */
 	$headings = array('Sun','Mon','Tues','Wednes','Thurs','Fri','Satur');
-	$backMonth= $month==date('m')?'':"onclick='window.location.replace(\"?current=events\");'";
-	$nextMonth= $month==date('m')?"onclick='window.location.replace(\"?current=events&next=1\");'":'';
+
+	$backMonth= "onclick='window.location.replace(\"?current=events&next=".$beforeD."\");'";
+	$nextMonth= "onclick='window.location.replace(\"?current=events&next=".$nextD."\");'";
+
 	$calendar.= '<tr class="calendar-row" >
-					<th '.$backMonth.' > <h3>'.($backMonth==''?'':'<').'</h3></th>
-					<th colspan="5"> <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
-					<th '.$nextMonth.' > <h3>'.($nextMonth==''?'':'>').'</h3></th>';
+				   <th '.$backMonth.' > <h3 style="cursor: pointer">'.($backMonth==''?'':'<').'</h3></th>
+				   <th colspan="5"> <h3>'.date('F Y',mktime(0, 0, 0, $month, 1, $year)).'</h3></th>
+				   <th '.$nextMonth.' > <h3 style="cursor: pointer">'.($nextMonth==''?'':'>').'</h3></th>';
 	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 
 	/* days and weeks vars now ... */
@@ -754,18 +850,50 @@ function draw_calendar_e($next){
 				$nameCount = $name[0];
 			}
                         
-                        if($name['3']==$list_day){
-                            $scrolli='div id="scbar"';
-                            $class='class="scrollbar"';
-                            $scrolle='</div>';
-                        }
-                                
+            if($name['3']==$list_day){
+                $scrolli='div id="scbar"';
+                $class='class="scrollbar"';
+                $scrolle='</div>';
+            }
+                             
+            $events = mysql_query("SELECT * FROM calendar WHERE id = '".$name[1]."'") or die (mysql_error());
+			$events  = mysql_fetch_assoc($events);
+
+			$evenModal = "
+			<div id='eventModal".$name[1]."' class='reveal-modal' data-reveal>
+					<div class='row panel'>
+						<h3 >Details Events :: ".$events['name']."</h3>
+						<div class='large-12 columns  radius' >	
+							<div class='row'>&nbsp;</div>
+							<div class='name-field' style='font-size: 16px !Important'>
+								<label style='font-size: 16px !Important'><strong>Description:<strong></label>
+								<p class='text-justify' style='font-size: 16px !Important'>".$events['description']."</p>
+							</div>
+							<div class='row'>&nbsp;</div>
+							<div class='email-field'>
+								<label style='font-size: 16px !Important'><strong>Date and Time:<strong></label>
+								<p class='text-left' style='font-size: 16px !Important'>".$events['date_ini']."</p>
+							</div>
+							<div class='row'>&nbsp;</div>
+							<div class='email-field'>
+								<label style='font-size: 16px !Important'><strong>Location:</strong></label>
+								<p class='text-left' style='font-size: 16px !Important'>".$events['location']."</p>
+							</div>
+						</div>
+					</div>
+					<a class='close-reveal-modal'>&#215;</a>
+				</div>
+				";
+
+
 			if (($name['2']) >= (date("Y-m-d H:i:s"))) {
-				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
-				$activitiesInDay.="<span title='New events' class='radius label' style='cursor:pointer;margin: 3px 0;' $onclick>".$nameCount."</span><br>";
+				//$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
+				$activitiesInDay.="<span title='New events' class='radius label' data-reveal-id='eventModal".$name[1]."' style='cursor:pointer;margin: 3px 0;' $onclick>".$nameCount."</span><br>";
+				$activitiesInDay.= $evenModal;
 			}else{
-				$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
-				$activitiesInDay.="<span title='Past events' class='radius label' style='cursor:pointer;margin: 3px 0; background-color: #BA6100' $onclick>".$nameCount."</span><br>";
+				//$onclick= "onclick='window.location.href=\"?current=eventsDetails&id=".$name[1]."\"'";
+				$activitiesInDay.="<span title='Past events' class='radius label' data-reveal-id='eventModal".$name[1]."' style='cursor:pointer;margin: 3px 0; background-color: #BA6100' $onclick>".$nameCount."</span><br>";
+				$activitiesInDay.= $evenModal;
 			} 
 		}
 

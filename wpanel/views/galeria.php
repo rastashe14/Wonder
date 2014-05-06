@@ -121,6 +121,7 @@ margin-bottom: 10px;
 }
 </style>
 <div class="row">
+	<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="button small radius">Volver</a>
 	<h3><?=$titleSection?></h3>
 	<h4><small>Select the picture(s) to upload: </small></h4>	
 	<div class="large-12  columns panel" >

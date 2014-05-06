@@ -24,7 +24,7 @@
 	  if ($_POST['action']=="add"){
 	 		$sti = $_POST['start_date'].' '.$_POST['start_time'];
 	 		//$ete = $_POST['end_date'].' '.$_POST['end_date'];
-	 		echo $sti;
+	 		
 		 	mysql_query("INSERT INTO calendar SET 
 						name = '".$_POST['name']."',
 						description = '".$_POST['description']."',
@@ -63,9 +63,9 @@
 <table class=" large-12 columns">
 <thead>
 	<tr >
-		<th>Name</th>
+		<th width="180">Name</th>
 		<th width="250">Description</th>
-		<th width="100">Date Time</th>
+		<th width="130">Date Time</th>
 		<!-- <th width="100">End Date</th> -->
 		<th width="140">Location</th>
 		<th width="100">Actions</th>
@@ -76,7 +76,7 @@
   <tr >
     <td><?=$calendars[name]?></td>
     <td><?=substr($calendars[description],0,40)?>...</td>
-    <td><small><?=$calendars[date_ini]?></small></td>
+    <td style="font-size:10px"><?=$calendars[date_ini]?></td>
     <!-- <td><small><?=$calendars[date_end]?></small></td> -->
     <td><?=substr($calendars[location],0,20)?></td>
     <td class="text-center">

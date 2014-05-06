@@ -2,7 +2,7 @@
 	
 	<ul class="title-area">
 		<li class="name">
-		<h1><a href="#"><?=$_SESSION['wspanel_user']['nombre']?></a></h1>
+		<h1><a style="cursor: default"><?=$_SESSION['wspanel_user']['nombre']?></a></h1>
 		</li>
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	</ul>

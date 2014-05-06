@@ -6,8 +6,6 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	 
      if ($_POST['sumito']=="si" && $_POST['id']==''){ //insert
 		 //_imprimir($_POST);
-		
-			
 
 				mysql_query("INSERT INTO contents SET 
 									id_status = '".$_POST['status']."',
@@ -18,12 +16,8 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 							") or die (mysql_error());
 				
 				mensajes("Info","Process Successfully.");	
-
-			
 			
 	 }elseif ($_POST[sumito]=="si" && $_POST['id']!=''){ //update
-	 
-		
 
 			mysql_query("UPDATE contents SET 
 							id_status = '".$_POST['status']."',
@@ -35,15 +29,15 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 					") or die (mysql_error());
 			
 			mensajes("Info","Process Successfully.");	
-
 	 }
 	 
 	 include("fckeditor/fckeditor.php");
      
 	 $query = mysql_query("SELECT * FROM contents WHERE id = '".$_GET['id']."' and id_type = '".$_GET['type']."' ") or die (mysql_error());
 	 $array = mysql_fetch_assoc($query);
-	 $titleSection = 'Update '.$content_type['name'].' :: '.$array['name'];
-	 
+	
+	 $titleSection = $_GET['id']!=''?'Update '.$content_type['name'].' :: '.$array['name']:'Add '.$content_type['name'];
+
 	 $status = mysql_query("SELECT * FROM status ORDER BY id") or die (mysql_error());
 ?>
 

@@ -63,7 +63,7 @@ if($id=="home"){
 <div class="row panel " > 
        <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns ">
        <?php if($type==1&&$id=='home'){ ?>
-       		<ul data-orbit data-options="timer_speed: 3500; animation_speed: 1500; pause_on_hover: false;">
+       		<ul data-orbit data-options="timer_speed: 8000; animation_speed: 4000; pause_on_hover: false;">
 	       		<?php 
 	       		$query = mysql_query($_conf['sql_menu']) or die (mysql_error());
 				while($news = mysql_fetch_assoc($query)){

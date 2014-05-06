@@ -54,7 +54,7 @@
 
 	<div class="tlf-field large-4 columns">
 					<label>Phone <small>required</small></label>
-					<input type="tel" name="tlf" value="<?=$array['tlf']?>" placeholder="1 234-567-8910" pattern="[0-9]+" required>
+					<input type="text" name="tlf" value="<?=$array['tlf']?>" placeholder="1 234-567-8910"  required pattern="number"> 
 					<small class="error">A phone number is required.</small>
 	</div>
 	<div class="ZipCode-field large-4 columns">
@@ -64,7 +64,7 @@
 	</div>
 	<div class="address-field large-8 columns">
 					<label>Address <small>required</small></label>
-					<textarea required name="address"  pattern="[a-zA-Z]+"><?=$array['address']?></textarea>
+					<textarea required name="address" ><?=$array['address']?></textarea>
 					<small class="error">An address is required.</small>
 	</div>
 
