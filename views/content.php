@@ -52,6 +52,7 @@ if($type!=''){
 				
 				$query = mysql_query($_conf['sql']) or die (mysql_error());
 				$array = mysql_fetch_assoc($query);
+				$numN = mysql_num_rows($query);
 			
 				
 if($id=="home"){				
@@ -118,10 +119,16 @@ if($id=="home"){
 			</ul>
 	    <?php  
 	    	
-	    }else{?>
-			<h3><?=$array[name]?><h3>
-			<p><?=$array[text]?></p>
+	    }else{
+			if($numN!=''){ ?>
+			<h3><?=$array['name']?><h3>
+			<p><?=$array['text']?></p>
+		<?php }else{?>
+			<h3 class="text-center" >This content is not available.</h3>
+			
 		<?php
+
+			}
 		}
 
 		//echo $_conf['folder']."<br>"; $type
