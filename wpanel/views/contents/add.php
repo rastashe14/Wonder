@@ -4,20 +4,21 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	 $content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
 	 $content_type = mysql_fetch_assoc($content_type);
 	 
-     if ($_POST['id']==''){ //insert
+     if ($_POST['action']=='add'){ //insert
 		 //_imprimir($_POST);
 
 				mysql_query("INSERT INTO contents SET 
 									id_status = '".$_POST['status']."',
 									name = '".$_POST['name']."',
-									summary = '".utf8_encode($_POST['resumen'])."',
+									summary = '".$_POST['resumen']."',
 									text = '".$_POST['des']."',
 									id_type = '".$_GET['type']."'	
 							") or die (mysql_error());
 				
 				mensajes("Info","Process Successfully.");	
 			
-	 }elseif ($_POST['id']!=''){ //update
+	 }
+	 if ($_POST['action']=='update'){ //update
 
 			mysql_query("UPDATE contents SET 
 							id_status = '".$_POST['status']."',
@@ -45,7 +46,7 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	
 	<legend><?=$titleSection?></legend>
 	
-	<form action="" method="post" enctype="multipart/form-data" class="custom" data-abide>
+	<form action="?url=views/contents/update.php&type=<?=$_GET['type']?>" method="post" enctype="multipart/form-data" class="custom" data-abide>
 		<div class="row">
 		<div class="name-field large-8 columns">
 			<label>Name: <small>required</small></label>
@@ -90,6 +91,7 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 			<button type="submit">Submit</button>
 			<input type="hidden" name="id" id="id" value="<?=$_GET['id']?>"/>
 			<input type="hidden" name="url" id="url" value="<?=$_GET['url']?>" />
+			<input type="hidden" name="action" id="action" value="<?=$_GET['id']?"update":"add";?>"/>
 
 				<?php if ($_GET['id']!=''){ ?>	
 				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/><a/>

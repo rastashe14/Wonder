@@ -1,46 +1,10 @@
 <?php 
-     if ($_POST['action']=="update"){
-		 //_imprimir($_REQUEST);
-			
-			$sti = $_POST['start_date'].' '.$_POST['start_time'];
-	 		//$ete = $_POST['end_date'].' '.$_POST['end_date'];
-
-			mysql_query("UPDATE calendar SET 
-						name = '".$_POST['name']."',
-						description = '".$_POST['description']."',
-						date_ini = '".$sti."',
-						location = '".$_POST['location']."'						  
-						WHERE id = '".$_POST['id']."' 
-			") or die (mysql_error());
-			
-			mensajes("Info","Process Successfully.");
-	 }
-
-	 if ($_POST['action']=="add"){
-	 		$sti = $_POST['start_date'].' '.$_POST['start_time'];
-	 		//$ete = $_POST['end_date'].' '.$_POST['end_date'];
-
-		 	mysql_query("INSERT INTO calendar SET 
-						name = '".$_POST['name']."',
-						description = '".$_POST['description']."',
-						date_ini = '".$sti."',
-						location = '".$_POST['location']."'	
-			") or die (mysql_error());
-					
-			mensajes("Info","Process Successfully.");
-	 }
-	 
 	 $sql = "SELECT * FROM calendar WHERE id = '".$_GET['id']."' ";
 	
 	 $query = mysql_query($sql) or die (mysql_error());
 	 $array = mysql_fetch_assoc($query);
 
 	 $dti = explode(" ", $array['date_ini']);
-	 //fecha fin
-	 //$dte = explode(" ", $array['date_end']);
-	 
-	 // print_r($dti);
-	 // print_r($dte);
 ?>
 <fieldset>
 	
