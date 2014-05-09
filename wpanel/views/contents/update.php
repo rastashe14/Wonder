@@ -10,6 +10,34 @@
 		 mensajes("Info!","The ".rtrim($content_type['name'],"s")." was deleted");
 	 }
 	 
+	  if ($_POST['action']=='add'){ //insert
+		 //_imprimir($_POST);
+
+				mysql_query("INSERT INTO contents SET 
+									id_status = '".$_POST['status']."',
+									name = '".$_POST['name']."',
+									summary = '".$_POST['resumen']."',
+									text = '".$_POST['des']."',
+									id_type = '".$_GET['type']."'	
+							") or die (mysql_error());
+				
+				mensajes("Info","Successful insertion process.");	
+			
+	 }
+	 if ($_POST['action']=='update'){ //update
+
+			mysql_query("UPDATE contents SET 
+							id_status = '".$_POST['status']."',
+							summary = '".$_POST['resumen']."',
+							text = '".$_POST['des']."',
+							name = '".$_POST['name']."'
+
+						WHERE id = '".$_POST['id']."' and id_type = '".$_GET['type']."'
+					") or die (mysql_error());
+			
+			mensajes("Info","Successful update process.");	
+	 }
+
 	 $_pagi_cuantos         = 12;
      $_pagi_nav_num_enlaces = 4;
      $_pagi_sql             = "SELECT * FROM contents where id_type = '".$_GET['type']."' ORDER BY name";
