@@ -10,21 +10,23 @@
 	*/
 	
 	if ($_SERVER['SERVER_NAME']=="www.wonderlandplayground.com" || $_SERVER['SERVER_NAME']=="wonderlandplayground.com"){
-	    $_wuser = "wonderlandpl_db";
-		$_wpass = "7412374123";	
-	    $_wdata = "wonderlandpl_db";
-	    $_wdomi = "http://wonderlandplayground.com/";
+		$_wuser = 'wonderlandpl_db';
+		$_wpass = '7412374123';
+		$_wdata = 'wonderlandpl_db';
+		$_path	= '/';
 	}else{
-	    $_wuser = "root";
-		$_wpass = "root";	
-	    $_wdata = "dbfasti";
-	    $_wdomi = "http://192.168.1.123/wonder/";
+		$_wuser = 'root';
+		$_wpass = 'root';
+		$_wdata = 'dbfasti';
+		$_path	= '/wonder/';
 	}
-	
-
+	define('DOMINIO', 'http://'.$_SERVER['SERVER_NAME'].$_path);
+	$_url=array_shift(explode('.php',$_SERVER['REQUEST_URI']));
+	$_url=array_shift(explode('?',$_url));
+	define('REL_PATH',str_repeat('../',substr_count(substr($_url,strlen($_path)),'/')));
+	unset($_url,$_path);
 
 	#Configuración principal del sitio
-	define("DOMINIO", $_wdomi);
 	define("HREF_DEFAULT", "javascript:void(0);");
 	define("DIRECTORIO", "/");
 	define("CARPETA_ADMIN", "wpanel/");
