@@ -1,6 +1,7 @@
+	<?php $imgLogo  = campo('config','`keys`', 'logo','value'); ?>
 	<div class="row top">
 		<div class="large-4 columns logo">
-			<a href="<?=DOMINIO?>"><img src="img/logo.png" /></a>
+			<a href="<?=DOMINIO?>"><img src="img/<?=$imgLogo?>" width="300" style="height: 100px; width: 300px" /></a>
 		</div>
 		
 		<div class="large-8 columns ">

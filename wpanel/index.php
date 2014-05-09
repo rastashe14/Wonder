@@ -8,11 +8,12 @@
 		 redirect("form_login.php");
 		 die();
 	 }
+	 $imgLogo  = campo('config','`keys`', 'logo','value');
 ?> 
 
 <div class="row ">
 	<div class="large-12  columns  top logo">
-		<img src="../img/logo.png" width="200" />
+		<img src="../img/<?=$imgLogo?>" width="200" style="height: 70px; width: 200px" />
 			
 	</div>
 </div>	

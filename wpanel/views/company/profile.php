@@ -1,4 +1,43 @@
 <?php
+
+	//unlink('./images/'.$this->input->post('logo_name'));
+	 if ($_SERVER['SERVER_NAME']=="www.wonderlandplayground.com" || $_SERVER['SERVER_NAME']=="wonderlandplayground.com"){
+		$targetFolder = '/img/';
+	}else{
+		$targetFolder= '/Wonder/img/';
+	}
+
+
+	 if (!empty($_FILES)) {
+
+		$parts = explode('.', $_FILES['file']['name']);
+		$ext   = strtolower(end($parts)); 
+		$tempFile = $_FILES['file']['tmp_name'];
+		$targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;
+		//$targetFile =  str_replace('//','/',$targetPath) . md5($parts[0]).'.'.$ext;
+		$targetFile =  str_replace('//','/',$targetPath) .md5($parts[0]).'.'.$ext;
+
+		// Validate the file type
+		$fileTypes = array('jpg','JPG','jpeg','JEPG','gif','GIF','png','PNG',); // File extensions
+		$fileParts = pathinfo($_FILES['file']['name']);
+		
+		if (in_array($fileParts['extension'],$fileTypes)){
+			@mkdir(str_replace('//','/',$targetPath), 0777, true);
+			move_uploaded_file($tempFile,$targetFile);
+			redimensionar($targetFile, $targetFile, 300,100);
+			$img  = campo('config','`keys`', 'logo','value');
+
+			@unlink(REL_PATH.'img/'.$img);
+
+			mysql_query("UPDATE config SET `value` = '".md5($parts[0]).'.'.$ext."' WHERE `keys` = 'logo' ") or die (mysql_error());
+			//echo $tempFile.'-'.$targetFile.'-'.$_FILES["file"]["error"];
+		} else {
+			$er = 1;
+			//echo 'Invalid file type.'; 
+		}
+	}
+
+
      if ($_POST['sumito']=="si"){
 		 //_imprimir($_REQUEST);
 		
@@ -16,10 +55,15 @@
 				$uri = 'views/company/profile.php';
 			
 			
-			mensajes("Info","Process Successfully.");	
+			($er!=1)?mensajes("Info","Process Successfully."):mensajes("Info","Invalid file type.");	
 		 
 	 }//sumito
-	 
+	
+	
+	// print_r($_FILES);
+	// echo  $_POST['file'];
+
+
 	 include("fckeditor/fckeditor.php");
 	 
 	 if ($_REQUEST['loc']!=''){
@@ -30,12 +74,12 @@
 	 
 	 $query = mysql_query($sql) or die (mysql_error());
 	 $array = mysql_fetch_assoc($query);
-	 
+	 $timestamp = time();
 ?>
 <fieldset>
 	
 	<legend>COMPANY <?=($_GET['loc']!=''?'LOCATIONS':'PROFILE')?></legend>
-	<form action=""  method="post" data-abide>
+	<form action=""  method="post" data-abide enctype="multipart/form-data">
 	<?php
 	if(empty($_REQUEST['loc'])){
 	?>	
@@ -67,7 +111,6 @@
 					<textarea required name="address" ><?=$array['address']?></textarea>
 					<small class="error">An address is required.</small>
 	</div>
-
 	<div class="facebook-field large-6 columns">
 					<label>Facebook: </label>
 					<input type="text" value="<?=$array['facebook']?>" name="facebook"   >
@@ -93,14 +136,35 @@
 		$oFCKeditor->Create() ; //  se crea el textarea    
 	?>
 	</div>
+	<div class="logo-field large-12 columns" style="margin: 20px 0">
+		<label>Change logo: </label>
+		<div style="border: 1px solid #ccc; height: 80px; border-radius: 5px">
+			<div class="founFile">
+				Search
+				<input type="file" id="file" name="file">
+			</div>
+			<div id="textLogo" style="margin-top: 30px; color: #A3A3A3">
+				No file selected
+			</div><br>
+			<legend style="position: absolute;background: none"><small>The image size should not exceed 2 MB and dimension 300 X 100 </small></legend>
+		</div>
+		
+	</div>
 	<div class="twitter-field large-12 columns">
 		<button type="submit">Submit</button>
 		<input type="hidden" name="sumito" id="sumito" value="si" />
 		<input type="hidden" name="url" id="url" value="<?=$_GET['url']?>" />
 		<input type="hidden" name="loc" id="loc" value="<?=($_GET['loc']!=''?$_GET['loc']:'')?>" />
-		<input type="hidden" name="action" id="action" value="<?=($_GET['action']!=''?$_GET['action']:'add')?>" />
-
-		
+		<input type="hidden" name="action" id="action" value="<?=($_GET['action']!=''?$_GET['action']:'add')?>" />		
     </div>
-	</form>
-</fieldset>	
+</form>
+	
+</fieldset>
+<script type='text/javascript'>
+	$(function() {
+		$('#file').change(function(event) {
+			$('#textLogo').html($('#file').val());
+			//alert($('#file').val());
+		});
+	});
+</script>

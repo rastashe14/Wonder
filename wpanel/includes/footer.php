@@ -10,7 +10,7 @@
 </div>
 </div>	
 <?=$jsLibraries?>
-
+<?=$uploadLogo?>
   <script src="../js/foundation.min.js"></script>
   
   <script>

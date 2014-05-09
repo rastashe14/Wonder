@@ -94,14 +94,17 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 			<input type="hidden" name="action" id="action" value="<?=$_GET['id']?"update":"add";?>"/>
 
 				<?php if ($_GET['id']!=''){ ?>	
-				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/><a/>
+				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/></a>
 				<?php if($_GET['type']!=1){?>
-				<a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/video.php"><img src="../img/videoGalery.png"/><a/>
+				<div id="videoIMG" style="float: right;position: absolute;top: 0;left: 240px;"><img src="../img/videoGalery.png"/></div>
 				<?php } } ?>
 		</div>
 	</div>			
 	</form>
 </fieldset>
+<div id="video" style="display: none">
+	<?php include('views/video.php'); ?>
+</div>
 <?php
 
 }else{
@@ -110,3 +113,9 @@ if($_GET['type']!=''){  //news 1, services 2, Contents 3
 	 
  }
 ?>
+
+<script>
+$('#videoIMG').click(function() {
+  $( "#video" ).toggle( "slide" );
+});
+</script>

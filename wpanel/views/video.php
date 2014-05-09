@@ -57,7 +57,7 @@ if($_GET['type']=="video"){
 ?>
 
 <div class="row">
-	<a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="button small radius">Volver</a>
+	
 	<h3><?=$titleSection?></h3>
 	<h4><small>Place the url of the video: <small>(youtube o vimeo)</small> </small></h4>	
 	<form action="?url=views/video.php&type=<?=$_GET[type]?>&id=<?=$_GET[id]?>"  method="post" id="form" data-abide>
