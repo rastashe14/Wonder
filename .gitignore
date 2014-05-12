@@ -17,6 +17,7 @@ local.properties
 .loadpath
 img/contents/
 img/news/
+img/galery/
 
 # External tool builders
 .externalToolBuilders/

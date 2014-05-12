@@ -78,10 +78,10 @@
         </a> 
 			
 		<div id='services_<?=$content[id]?>' class='reveal-modal small' data-reveal>
-						<h3><small>Are you sure to delete this <?=rtrim($content_type['name'],"s");?>?</small></h3>
-						<p><?=$content[name]?></p>
-						<a href='?type=<?=$_GET['type']?>&url=<?=$_GET[url]?>&id=<?=$content[id]?>'  class='small radius button'>Yes</a>
-						<a class='close-reveal-modal'>&#215;</a>
+			<h3><small>Are you sure to delete this <?=rtrim($content_type['name'],"s");?>?</small></h3>
+			<p><?=$content[name]?></p>
+			<a href='?type=<?=$_GET['type']?>&url=<?=$_GET[url]?>&id=<?=$content[id]?>'  class='small radius button'>Yes</a>
+			<a class='close-reveal-modal'>&#215;</a>
 		</div>	
 	</td>
   </tr>

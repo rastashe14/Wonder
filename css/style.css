@@ -327,6 +327,40 @@ box-shadow: 0 0 6px gray inset;
 	position: relative;
 }
 
+.founFile{
+	color:#fff;
+	font-size:1rem;
+	float:left;
+	padding:4px;
+	margin:12px 5px 5px 0;
+	background:#008cba;
+	transition:300ms ease all;
+	-webkit-transition:300ms ease all;
+	-moz-transition:300ms ease all;
+	-o-transition:300ms ease all;
+	text-decoration:none;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	display: block;
+    line-height: 52px;
+    padding: 0 30px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+.founFile:hover{
+	text-decoration:none;
+	background:#007095;
+}
+.founFile input{
+	position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    cursor: pointer;
+    opacity: 0;
+    font-size: 40px;
+}
+
 /*
 #newsOrbit .orbit-container .orbit-slides-container #thumbsNews li img {display: inline-block;
 vertical-align: middle}*/
