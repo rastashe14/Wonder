@@ -4,7 +4,7 @@
 	 $content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
 	 $content_type = mysql_fetch_assoc($content_type);
 
-	 if ($_GET[id]!=""){
+	 if ($_GET['id']!=""){
 		 deleteDir('../img/'.$content_type['folder'].'/'.$_GET['id'], true);
 		 mysql_query("DELETE FROM contents WHERE id = '".$_GET['id']."' and id_type = '".$_GET['type']."'") or die (mysql_error());
 		 mensajes("Info!","The ".rtrim($content_type['name'],"s")." was deleted");
@@ -13,28 +13,32 @@
 	  if ($_POST['action']=='add'){ //insert
 		 //_imprimir($_POST);
 
-				mysql_query("INSERT INTO contents SET 
-									id_status = '".$_POST['status']."',
-									name = '".$_POST['name']."',
-									summary = '".$_POST['resumen']."',
-									text = '".$_POST['des']."',
-									id_type = '".$_GET['type']."'	
-							") or die (mysql_error());
-				
+				mysql_query("
+					INSERT INTO contents SET 
+						id_status = '".$_POST['status']."',
+						name = '".$_POST['name']."',
+						summary = '".$_POST['resumen']."',
+						text = '".$_POST['des']."',
+						id_type = '".$_GET['type']."'	
+				") or die (mysql_error());
+				$id=mysql_insert_id();
+				@mkdir('../img/'.$content_type['folder'].'/'.$id, 0777, true);
+
 				mensajes("Info","Successful insertion process.");	
 			
 	 }
 	 if ($_POST['action']=='update'){ //update
 
-			mysql_query("UPDATE contents SET 
-							id_status = '".$_POST['status']."',
-							summary = '".$_POST['resumen']."',
-							text = '".$_POST['des']."',
-							name = '".$_POST['name']."'
+			mysql_query("
+				UPDATE contents SET 
+					id_status = '".$_POST['status']."',
+					summary = '".$_POST['resumen']."',
+					text = '".$_POST['des']."',
+					name = '".$_POST['name']."'
+				WHERE id = '".$_POST['id']."' and id_type = '".$_GET['type']."'
+			") or die (mysql_error());
+			@mkdir('../img/'.$content_type['folder'].'/'.$_POST['id'], 0777, true);
 
-						WHERE id = '".$_POST['id']."' and id_type = '".$_GET['type']."'
-					") or die (mysql_error());
-			
 			mensajes("Info","Successful update process.");	
 	 }
 
@@ -45,7 +49,6 @@
 	 include('../includes/paginator.inc.php');
 ?>
 
-
 <link media="screen" rel="stylesheet" href="../css/paginator.css" />
 
 <fieldset>
@@ -54,29 +57,28 @@
 	
 <table class=" large-12 columns">
 <thead>
-	<tr >
-		<th  >Name</th>
-		<th  >Summary</th>
-		<th width="110" >Status</th>
-		<th  >Actions</th>
+	<tr>
+		<th>Name</th>
+		<th>Summary</th>
+		<th width="110">Status</th>
+		<th>Actions</th>
 	</tr>
 </thead>
 <tbody>
   <?php while ($content = mysql_fetch_assoc($_pagi_result)){ ?>
-  <tr >
-    <td  ><?=$content[name]?></td>
-    <td ><?=substr($content[summary],0,40)?>...</td>
-    <td  ><?=campo('status','id', $content[id_status], 'name')?></td>
-    <td  >
+  <tr>
+    <td><?=$content[name]?></td>
+    <td><?=substr($content[summary],0,40)?>...</td>
+    <td><?=campo('status','id', $content[id_status], 'name')?></td>
+    <td>
     	<?php if($_GET['type']!=1){?>
 		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/video.php"> <img src="../img/video.png" width="16" title="Video." /></a>
 		<?php } ?>
 		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/galeria.php"> <img src="../img/photo.png" width="16" title="Photos." /></a>
 		<a href="?type=<?=$_GET['type']?>&id=<?=$content[id]?>&url=views/contents/add.php"><img src="../img/editar.png" width="16" title="Update."  />
-		<a href='#' data-reveal-id='services_<?=$content[id]?>'  >	
-			<img src="../img/salir.gif" width="16" title="Delete."    />
-        </a> 
-			
+		<a href='#' data-reveal-id="services_<?=$content[id]?>">
+			<img src="../img/salir.gif" width="16" title="Delete."/>
+        </a>
 		<div id='services_<?=$content[id]?>' class='reveal-modal small' data-reveal>
 			<h3><small>Are you sure to delete this <?=rtrim($content_type['name'],"s");?>?</small></h3>
 			<p><?=$content[name]?></p>
@@ -91,12 +93,8 @@
 
 <?php echo $_pagi_navegacion,$_pagi_info; ?>
 </fieldset>	
-	
-	<?php
-
- }else{
-	 
-	mensajes("Alert!","Sorry this content can't be loaded"); 
-	 
- }
+<?php
+}else{
+	mensajes("Alert!","Sorry this content can't be loaded");
+}
 ?>

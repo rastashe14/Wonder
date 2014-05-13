@@ -2,16 +2,13 @@ body {
   background-image:url('../img/bg.gif');
 }
 
-
 .logo{
 	margin: 0px;
 	margin-top: 3px;
-	
 }
 
 a{
 	color: #87bff3 !important;
-	
 }
 
 /*menu */
@@ -364,3 +361,7 @@ box-shadow: 0 0 6px gray inset;
 /*
 #newsOrbit .orbit-container .orbit-slides-container #thumbsNews li img {display: inline-block;
 vertical-align: middle}*/
+
+.pointer{
+    cursor:pointer;
+}

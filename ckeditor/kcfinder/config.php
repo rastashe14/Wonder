@@ -16,14 +16,13 @@
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
 
-include('session.php');//variable $ckf_session
+include('session.php');//configuracion de sesion de usuario
 
 $_CONFIG = array(
 
-
 // GENERAL SETTINGS
-	'disabled' => $ckf['disabled'],
-	'uploadURL' => $ckf['uploadURL'],//"upload",
+	'disabled' => true,
+	'uploadURL' => "upload",
 	'uploadDir' => '',
 	'theme' => 'default',
 
@@ -32,11 +31,6 @@ $_CONFIG = array(
 		'images'=> '*img',
 		'files' => '',
 		'flash' => 'swf',
-
-	// Personal types
-		'galery'	=> '*img',
-		'contents'	=> '*img',
-		'news'		=> '*img',
 
 	// TinyMCE types
 		'file' => '',
@@ -127,5 +121,6 @@ $_CONFIG = array(
 	//'_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
 
 );
+
 $_CONFIG=array_merge($_CONFIG,$kcf);
 ?>

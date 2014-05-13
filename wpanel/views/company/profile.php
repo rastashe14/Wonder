@@ -64,8 +64,6 @@
 	// echo  $_POST['file'];
 
 
-	 include("fckeditor/fckeditor.php");
-	 
 	 if ($_REQUEST['loc']!=''){
 		 $sql = "SELECT * FROM locations WHERE id = '".$_REQUEST['loc']."' ";
 	 }else{
@@ -124,8 +122,10 @@
 	<?php }?>	
 	<div class="twitter-field large-12 columns">	
 	<label>Sumary: <small>required</small></label>
-	<?php
-		$oFCKeditor = new FCKeditor('profile') ; // es el id y name del campo de texto
+	<textarea id="profile" name="profile" class="ckeditor"><?=$array['text']?></textarea>
+	<?php /*
+		include("fckeditor/fckeditor.php");
+		$oFCKeditor = new FCKeditor('profile2') ; // es el id y name del campo de texto
 		$oFCKeditor->BasePath = 'fckeditor/'; // ruta al script fckeditor
 		//$cuerpo= html_entity_decode($cuerpo); // Para que se muestre como elementos HTML y no como 'codigo HTML'
 		$oFCKeditor->Width  = '100%' ; // ancho del formulario
@@ -134,7 +134,7 @@
 		$oFCKeditor->Config['AutoDetectLanguage']    = false ;
 		$oFCKeditor->Config['DefaultLanguage']        = 'en' ;
 		$oFCKeditor->Create() ; //  se crea el textarea    
-	?>
+	*/ ?>
 	</div>
 	<div class="logo-field large-12 columns" style="margin: 20px 0">
 		<label>Change logo: </label>
@@ -160,11 +160,14 @@
 </form>
 	
 </fieldset>
-<script type='text/javascript'>
-	$(function() {
-		$('#file').change(function(event) {
-			$('#textLogo').html($('#file').val());
-			//alert($('#file').val());
-		});
+<script type="text/javascript">
+(function(){
+	CKEDITOR.replace('profile',{
+		removeButtons:'Image,Table'
 	});
+	$('#file').change(function(event){
+		$('#textLogo').html($('#file').val());
+		//alert($('#file').val());
+	});
+})();
 </script>
