@@ -1,6 +1,7 @@
 <?php
 if($_GET['type']!=''){//news 1, services 2, Contents 3
-	$content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
+	$gid=isset($_GET['id'])?$_GET['id']:'new'.date('YmdHis').rand(0,9);
+	$content_type = mysql_query('SELECT * FROM content_type WHERE id = "'.$_GET['type'].'"') or die (mysql_error());
 	$content_type = mysql_fetch_assoc($content_type);
 
 	if($_POST['action']=='add'){//insert
@@ -31,19 +32,21 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 	$titleSection = $_GET['id']!=''?'Update '.$content_type['name'].' :: '.$array['name']:'Add '.$content_type['name'];
 	$status = mysql_query("SELECT * FROM status ORDER BY id") or die (mysql_error());
 
-	$gid=$_GET['id'];
 	$type=$content_type['folder'];
-	$dir=$type.'/'.$_GET['id'];
+	$dir=$type.'/'.$gid;
 	if($gid!='')//id de galeria
 		@mkdir('../img/'.$content_type['folder'].'/'.$gid,0777,true);
 ?>
 <fieldset>
 	<legend><?=$titleSection?></legend>
 	<form action="?url=views/contents/update.php&type=<?=$_GET['type']?>" method="post" enctype="multipart/form-data" class="custom" data-abide>
+		<?php if($_GET['id']==''){ ?>
+		<input type="hidden" name="img_folder" value="<?=$gid?>"/>
+		<?php } ?>
 		<div class="row">
 			<div class="name-field large-8 columns">
 				<label>Name: <small>required</small></label>
-				<input type="text" name="name" value="<?=$array['name']?>" required>
+				<input type="text" name="name" value="<?=$array['name']?>" required/>
 				<small class="error">Name is required.</small>
 			</div>
 			<div class="address-field large-8 columns">
@@ -51,7 +54,7 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 				<textarea required name="resumen" ><?=$array['summary']?></textarea>
 				<small class="error">Summary is required.</small>
 			</div>
-			<div class="twitter-field large-12 columns">	
+			<div class="twitter-field large-12 columns">
 				<label>Description: <small>required</small></label>
 				<textarea id="description" name="des" class="ckeditor"><?=$array['text']?></textarea>
 			<?php /*
@@ -71,7 +74,7 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 				<label for="status">Status:</label>
 				<select name="status" id="status" >
 					<?php while ($statu = mysql_fetch_assoc($status)){ ?>
-					<option value="<?=$statu['id']?>" <?php if ($statu['id']==$array[id_status]){ echo "selected"; } ?> ><?=$statu['name']?></option>
+					<option value="<?=$statu['id']?>" <?php if ($statu['id']==$array[id_status]){ echo "selected"; } ?>><?=$statu['name']?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -80,7 +83,7 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 				<input type="hidden" name="id" id="id" value="<?=$_GET['id']?>"/>
 				<input type="hidden" name="url" id="url" value="<?=$_GET['url']?>"/>
 				<input type="hidden" name="action" id="action" value="<?=$_GET['id']?"update":"add";?>"/>
-				<?php if ($_GET['id']!=''){ ?>
+				<?php if($gid!=''){ ?>
 					<span id="gallery" class="pointer"><img src="../img/photoGalery.png"/></span>
 					<!-- <a href="index.php?type=<?=$_GET['type']?>&id=<?=$_GET['id']?>&url=views/galeria.php"><img src="../img/photoGalery.png"/></a> -->
 				<?php if($_GET['type']!=1){?>
@@ -90,8 +93,11 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 		</div>			
 	</form>
 	<style type="text/css">
-	#kcfinder_div{
+	#kcfinder_div,#kcfinder_title{
 		display:none;
+		margin-top:5px;
+	}
+	#kcfinder_div{
 		position:relative;
 		background:#e0dfde;
 		border:2px solid #3687e2;
@@ -105,11 +111,13 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 		height:400px;
 	}
 	</style>
+	<div id="kcfinder_title">Gallery Folder: <b><?=$dir?></b></div>
 	<div id="kcfinder_div"></div>
 </fieldset>
 <script type="text/javascript">
 (function(){
-	var get='type=<?=$type?>&dir=<?=$dir?>',
+	var dir='<?=$dir?>',
+		get='type=<?=$type?>&dir='+dir,
 		kcf_path='../ckeditor/kcfinder',
 		gallery=kcf_path+'/browse.php?'+get;
 	CKEDITOR.replace('description',{
@@ -118,8 +126,10 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 	});
 	$('#gallery').click(function(){
 		if($('#kcfinder_div iframe').length&&$('#kcfinder_div iframe').attr('src')==gallery){
+			$('#kcfinder_title').hide();
 			$('#kcfinder_div').empty().hide();
 		}else{
+			$('#kcfinder_title').show();
 			$('#kcfinder_div').empty().html('<iframe src="'+gallery+'" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"/>').show();
 		}
 	});

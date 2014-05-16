@@ -44,6 +44,9 @@
 	<!--<a href="<?=$_SERVER['HTTP_REFERER']?>" class="button small radius">back</a><!---->
 	<h3><?=$titleSection?></h3>
 	<style type="text/css">
+	#kcfinder_div,#kcfinder_title{
+		margin-top:5px;
+	}
 	#kcfinder_div{
 		position:relative;
 		background:#e0dfde;
@@ -58,6 +61,7 @@
 		height:400px;
 	}
 	</style>
+	<?php if($dir){?><br/><div id="kcfinder_title">Gallery Folder: <b><?=$dir?></b></div><?php } ?>
 	<div id="kcfinder_div"></div>
 	<script>
 		$('#kcfinder_div').html('<iframe src="../ckeditor/kcfinder/browse.php?type=<?=$type?>&dir=<?=$dir?>" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" />');
