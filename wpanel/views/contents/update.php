@@ -8,11 +8,11 @@ if($_GET['type']!=''){
 	$old='n'.date('YmdHis',time()-6*60*60);
 	echo $elemento.'<br/>';
 	$folder=$content_type['folder'];
-	$dir=@opendir("../img/$folder/new");
+	$dir=@opendir("../img/$folder/temp");
 	while($elemento=@readdir($dir)){ 
 		if(preg_match('/^n\d+$/i',$elemento)&&$elemento<$old){
-			deleteDir("../img/$folder/new/$elemento",true);
-			deleteDir("../img/.thumbs/$folder/new/$elemento",true);
+			deleteDir("../img/$folder/temp/$elemento",true);
+			deleteDir("../img/.thumbs/$folder/temp/$elemento",true);
 		}
 	}
 	//fin borrado carpetas

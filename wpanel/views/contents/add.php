@@ -16,8 +16,8 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 		") or die (mysql_error());
 		$id=mysql_insert_id();
 		if(isset($_POST['img_folder'])){
-			@rename("../img/$folder/new/".$_POST['img_folder'],"../img/$folder/$id");
-			@rename("../img/.thumbs/$folder/new/".$_POST['img_folder'],"../img/.thumbs/$folder/new/$id");
+			@rename("../img/$folder/temp/".$_POST['img_folder'],"../img/$folder/$id");
+			@rename("../img/.thumbs/$folder/temp/".$_POST['img_folder'],"../img/.thumbs/$folder/temp/$id");
 		}
 		mensajes("Info","Process Successfully.");	
 	}
@@ -39,8 +39,8 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 
 	$type=$content_type['folder'];
 	if($gid==''){
-		@mkdir("../img/$type/new",0777,true);
-		$gid='new/n'.date('YmdHis').rand(0,9);
+		@mkdir("../img/$type/temp",0777,true);
+		$gid='temp/n'.date('YmdHis').rand(0,9);
 	}
 	$dir="$type/$gid";
 	if($gid!=''){//id de galeria
