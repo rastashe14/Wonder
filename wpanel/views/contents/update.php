@@ -5,14 +5,14 @@ if($_GET['type']!=''){
 	$content_type = mysql_fetch_assoc($content_type);
 
 	//borrando carpetas residuales
-	$old='new'.date('YmdHis',time()-6*60*60);
+	$old='n'.date('YmdHis',time()-6*60*60);
 	echo $elemento.'<br/>';
-	$path='../img/'.$content_type['folder'];
-	$dir=opendir($path);
-	while($elemento=readdir($dir)){ 
-		if(preg_match('/^new\d+$/i',$elemento)&&$elemento<$old){
-			deleteDir('../img/'.$content_type['folder'].'/'.$elemento,true);
-			deleteDir('../img/.thumbs/'.$content_type['folder'].'/'.$elemento,true);
+	$folder=$content_type['folder'];
+	$dir=@opendir("../img/$folder/new");
+	while($elemento=@readdir($dir)){ 
+		if(preg_match('/^n\d+$/i',$elemento)&&$elemento<$old){
+			deleteDir("../img/$folder/new/$elemento",true);
+			deleteDir("../img/.thumbs/$folder/new/$elemento",true);
 		}
 	}
 	//fin borrado carpetas

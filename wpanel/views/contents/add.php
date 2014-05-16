@@ -1,6 +1,6 @@
 <?php
 if($_GET['type']!=''){//news 1, services 2, Contents 3
-	$gid=isset($_GET['id'])?$_GET['id']:'new'.date('YmdHis').rand(0,9);
+	$gid=$_GET['id'];
 	$content_type = mysql_query('SELECT * FROM content_type WHERE id = "'.$_GET['type'].'"') or die (mysql_error());
 	$content_type = mysql_fetch_assoc($content_type);
 
@@ -33,9 +33,14 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 	$status = mysql_query("SELECT * FROM status ORDER BY id") or die (mysql_error());
 
 	$type=$content_type['folder'];
-	$dir=$type.'/'.$gid;
-	if($gid!='')//id de galeria
-		@mkdir('../img/'.$content_type['folder'].'/'.$gid,0777,true);
+	if($gid==''){
+		@mkdir("../img/$type/new",0777,true);
+		$gid='new/n'.date('YmdHis').rand(0,9);
+	}
+	$dir="$type/$gid";
+	if($gid!=''){//id de galeria
+		@mkdir("../img/$type/$gid",0777,true);
+	}
 ?>
 <fieldset>
 	<legend><?=$titleSection?></legend>
