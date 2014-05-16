@@ -18,8 +18,8 @@ if($_GET['type']!=''){
 	//fin borrado carpetas
 
 	if($_GET['id']!=""){
-		deleteDir('../img/'.$content_type['folder'].'/'.$_GET['id'], true);
-		deleteDir('../img/.thumbs/'.$content_type['folder'].'/'.$_GET['id'], true);
+		deleteDir("../img/$folder/".$_GET['id'], true);
+		deleteDir("../img/.thumbs/$folder/".$_GET['id'], true);
 		mysql_query("DELETE FROM contents WHERE id = '".$_GET['id']."' and id_type = '".$_GET['type']."'") or die (mysql_error());
 		mensajes('Info!','The '.rtrim($content_type['name'],'s').' was deleted');
 	}
@@ -35,6 +35,15 @@ if($_GET['type']!=''){
 				id_type = '".$_GET['type']."'	
 		") or die (mysql_error());
 		$id=mysql_insert_id();
+		if($_POST['img_folder']){
+			@rename("../img/$folder/".$_POST['img_folder'],"../img/$folder/$id");
+			@rename("../img/.thumbs/$folder/".$_POST['img_folder'],"../img/.thumbs/$folder/$id");
+			mysql_query("
+				UPDATE contents SET
+					text = '".str_replace('/'.$_POST['img_folder'],'/'.$id,$_POST['des'])."'
+				WHERE id = '".$id."'
+			") or die (mysql_error());
+		}
 		mensajes('Info',"Successful insertion process.");
 	}
 	if ($_POST['action']=='update'){ //update

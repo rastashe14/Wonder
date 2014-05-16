@@ -14,6 +14,11 @@ if($_GET['type']!=''){//news 1, services 2, Contents 3
 				text = '".$_POST['des']."',
 				id_type = '".$_GET['type']."'
 		") or die (mysql_error());
+		$id=mysql_insert_id();
+		if(isset($_POST['img_folder'])){
+			@rename("../img/$folder/new/".$_POST['img_folder'],"../img/$folder/$id");
+			@rename("../img/.thumbs/$folder/new/".$_POST['img_folder'],"../img/.thumbs/$folder/new/$id");
+		}
 		mensajes("Info","Process Successfully.");	
 	}
 	if($_POST['action']=='update'){//update
