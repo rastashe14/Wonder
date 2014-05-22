@@ -8,7 +8,6 @@ a{
 }
 
 #sub-nav-top dd a{
-	
 	padding: 0;
 	margin-right: 5px;
 	margin-left: -5px; 
@@ -380,3 +379,7 @@ box-shadow: 0 0 6px gray inset;
 /*
 #newsOrbit .orbit-container .orbit-slides-container #thumbsNews li img {display: inline-block;
 vertical-align: middle}*/
+
+.pointer{
+    cursor:pointer;
+}

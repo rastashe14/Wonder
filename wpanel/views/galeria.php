@@ -1,22 +1,30 @@
 <?php
-	
-     $content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
-	 $content_type = mysql_fetch_assoc($content_type);
-	
+	$content_type = mysql_query("SELECT * FROM content_type WHERE id = '".$_GET['type']."' ") or die (mysql_error());
+	$content_type = mysql_fetch_assoc($content_type);
+
+	//kcfinder
+	if($_GET['type']=="galeria"){
+		$titleSection = ':: General Gallery ::';
+		$type='galery';
+		$dir='';
+	}else{
+		$titleSection = 'Gallery '.$content_type['name'].' :: '.campo('contents', 'id', $_GET['id'], 'name');
+		$type=$content_type['folder'];
+		$dir=$type.'/'.$_GET['id'];
+	}
+
 	if($_GET['type']=="galeria"){
 		$folder = 'galery';
-		$url = '?type='.$_GET[type].'&url='.$_GET[url];		
-		$titleSection = ':: General Gallery ::';	
-		
+		$url = '?type='.$_GET[type].'&url='.$_GET[url];
+		$titleSection = ':: General Gallery ::';
 	}else{
-
 		$folder = $content_type['folder'].'/'.$_GET[id];
-		$url = '?type='.$_GET[type].'&url='.$_GET[url].'&id='.$_GET[id];		
+		$url = '?type='.$_GET[type].'&url='.$_GET[url].'&id='.$_GET[id];
 		$titleSection = 'Gallery '.$content_type['name'].' :: '.campo('contents', 'id', $_GET['id'], 'name');
 	}
-	
+
 	if ($_GET[delimg]=="si"){
-	    @unlink("../img/".$folder."/".$_GET['foto']);
+		@unlink('../img/'.$folder.'/'.$_GET['foto']);
 		mensajes("Info!","The picture was deleted");
 		$busqueda = mysql_query("SELECT * FROM  `location_pic_detail` WHERE  `img` LIKE  '".$_GET['foto']."'") or die (mysql_error());
 		if(mysql_num_rows ($busqueda)!=0){
@@ -26,12 +34,41 @@
 	$timestamp = time();
 	$unique = md5('unique_salt' . $timestamp);
 
-	if ($_SERVER['SERVER_NAME']=="www.wonderlandplayground.com" || $_SERVER['SERVER_NAME']=="wonderlandplayground.com"){
+	if($_SERVER['SERVER_NAME']=="www.wonderlandplayground.com" || $_SERVER['SERVER_NAME']=="wonderlandplayground.com"){
 		$dominio = '/img/'.$folder.'/';
 	}else{
 		$dominio = '/Wonder/img/'.$folder.'/';
 	}
+?>
+<div class="row">
+	<!--<a href="<?=$_SERVER['HTTP_REFERER']?>" class="button small radius">back</a><!---->
+	<h3><?=$titleSection?></h3>
+	<style type="text/css">
+	#kcfinder_div,#kcfinder_title{
+		margin-top:5px;
+	}
+	#kcfinder_div{
+		position:relative;
+		background:#e0dfde;
+		border:2px solid #3687e2;
+		-webkit-border-radius:6px;
+		-moz-border-radius:6px;
+		border-radius:6px;
+		padding:1px;
+	}
+	#kcfinder_div iframe{
+		width:100%;
+		height:400px;
+	}
+	</style>
+	<?php if($dir){?><br/><div id="kcfinder_title">Gallery Folder: <b><?=$dir?></b></div><?php } ?>
+	<div id="kcfinder_div"></div>
+	<script>
+		$('#kcfinder_div').html('<iframe src="../ckeditor/kcfinder/browse.php?type=<?=$type?>&dir=<?=$dir?>" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" />');
+	</script>
+</div>
 
+<?php /*
 $jsLibraries="
 <link rel='stylesheet'  type='text/css' href='../js/uploadify/uploadify.css'/>
 <script type='text/javascript' src='../js/uploadify/jquery.uploadify.js'></script>
@@ -181,3 +218,4 @@ margin-bottom: 10px;
 		?>
 	</div>
 </div>
+<?php /**/
