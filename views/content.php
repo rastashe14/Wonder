@@ -125,12 +125,9 @@ if($id=="home"){
 			<p><?=$array['text']?></p>
 		<?php }else{?>
 			<h3 class="text-center" >This content is not available.</h3>
-			
 		<?php
-
 			}
 		}
-
 		//echo $_conf['folder']."<br>"; $type
 		if($_conf['folder']){ 
 			$folder='img/'.$_conf['folder'].'/'.$id;
@@ -190,11 +187,11 @@ if($id=="home"){
 	if ($_conf['sql_menu']){
 		$menus = mysql_query($_conf['sql_menu']) or die (mysql_error()); 
 ?>
-		<div class="large-3 columns ">
+		<div class="large-3 columns " id="sub-side-menu">
 			<h3><?=$_conf['title_menu']?></h3>
 			<ul class="side-nav">
           <?php while ($menu = mysql_fetch_assoc($menus)){?>
-				<li ><a style="color:#B38448 !important; font-weight: bold" href="<?=DOMINIO.$_conf['link']?>&id=<?=$menu['id']?>"><?=$menu['name']?></a></li>
+				<li ><a style="" href="<?=DOMINIO.$_conf['link']?>&id=<?=$menu['id']?>"><?=$menu['name']?></a></li>
 				<li class="divider"></li>
           <?php } ?>
 			 

@@ -1,8 +1,8 @@
 <?php
- include ('sesion.php');
- include ('../../includes/config.php');
- include ('../../includes/conexion.php');
- include ('../../includes/funciones.php');
+ require_once ('sesion.php');
+ require_once ('../../includes/config.php');
+ require_once ('../../includes/conexion.php');
+ require_once ('../../includes/funciones.php');
 
  //print_r($_FILES);
 

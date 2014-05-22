@@ -24,6 +24,16 @@
 
 	<link rel="stylesheet" href="css/foundation.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
+
+	<?php
+		$themenew  = campo('themes','status', '1','themes');
+		//echo 'tema: '.$themenew;
+		if ($themenew!='') { 
+	?>
+		<link rel="stylesheet" href="wpanel/views/themes/new_css/<?=$themenew?>/style.css"/>
+	<?php
+		}
+	?>
 	<script src="js/vendor/jquery.js"></script>
 	<script src="js/vendor/custom.modernizr.js"></script>
 </head>

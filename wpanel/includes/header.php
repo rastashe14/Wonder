@@ -1,8 +1,8 @@
 <?php
-	 include ('includes/sesion.php');
-	 include ('../includes/config.php');
-	 include ('../includes/conexion.php');
-	 include ('../includes/funciones.php');
+	 require_once ('includes/sesion.php');
+	 require_once ('../includes/config.php');
+	 require_once ('../includes/conexion.php');
+	 require_once ('../includes/funciones.php');
 ?> 
 <!DOCTYPE html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
@@ -33,6 +33,16 @@
   
   <link rel="stylesheet" href="../css/foundation.css">
   <link rel="stylesheet" href="../css/style.css">
+
+	<?php
+		$themenew  = campo('themes','status', '1','themes');
+		//echo 'tema: '.$themenew;
+		if ($themenew!='') { 
+	?>
+		<link rel="stylesheet" href="../wpanel/views/themes/new_css/<?=$themenew?>/style.css"/>
+	<?php
+		}
+	?>
 
   <script src="../js/vendor/custom.modernizr.js"></script>
   <script src="../js/jquery.js"></script>

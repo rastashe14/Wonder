@@ -1,5 +1,5 @@
 <?php
-	 include ('includes/header.php');
+	 require_once ('includes/header.php');
 	 
 	 if (isset($_SESSION['wspanel_user'])){
 	 
@@ -12,38 +12,40 @@
 ?> 
 
 <div class="row ">
-	<div class="large-12  columns  top logo">
+	<div class="large-10  columns  top logo">
 		<img src="../img/<?=$imgLogo?>" width="200" style="height: 70px; width: 200px" />
-			
+	</div>
+	<div class="large-2 columns top logo" style="padding: 0;">
+		<div class="contain-to-grid" style="background: none">
+		  <nav class="top-bar" data-topbar>
+		    <section class="top-bar-section">
+			    <ul class="right">
+			      <li><a href="index.php?url=views/themes/themes.php">Themes</a></li>
+			    </ul>
+			  </section>
+		  </nav>
+		</div>
 	</div>
 </div>	
 <div class="row ">	
-	
-		<?php include ('includes/menu.php');?>
-			
-	
+	<?php require_once ('includes/menu.php');?>
 </div>	
 <div class="row panel">	
 	<div class="large-12  columns ">
 		<?php if(!isset($_GET['url'])){
-		include ('views/company/profile.php');
+		require_once ('views/company/profile.php');
 			}elseif(file_exists($_GET['url'])){
-				include ($_GET['url']);
+				require_once ($_GET['url']);
 			}else{
-				
 				mensajes("Alert!","Sorry this content can't be loaded"); 
 			}
-	?>
-		
+		?>
 	</div>
 </div>
 <?php 	  
-	 include ('includes/footer.php'); 
-     
+	 require_once ('includes/footer.php'); 
 	 }else{
-	 
 	       redirect("form_login.php");
-	 
 	 }
 ?>
 <script>

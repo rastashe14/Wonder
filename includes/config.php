@@ -18,7 +18,7 @@
 		$_wuser = 'root';
 		$_wpass = 'root';
 		$_wdata = 'dbfasti';
-		$_path	= '/wonder/';
+		$_path	= '/Wonder';
 	}
 	define('DOMINIO', 'http://'.$_SERVER['SERVER_NAME'].$_path);
 	$_url=array_shift(explode('.php',$_SERVER['REQUEST_URI']));

@@ -93,7 +93,7 @@ function quitar_inyect(){
 
 function mensajes( $titulo,$content){
 
-		$type= $titulo=="Error!"? "warning":"success";
+		$type= $titulo=="Error!"? "alert":"success";
 		
          $action = '<div class="row">
 						<div data-alert class="alert-box radius '.$type.'">
@@ -960,5 +960,59 @@ function isVideo($type,&$value){
 		return preg_match(regex('vimeo'),$value);
 }
 
-	 
+function listar_directorios_ruta($ruta){ 
+   // abrir un directorio y listarlo recursivo 
+   if (is_dir($ruta)) {
+   	 
+      if ($dh = opendir($ruta)) {
+         while (($file = readdir($dh)) !== false) {
+            //esta línea la utilizaríamos si queremos listar todo lo que hay en el directorio 
+            //mostraría tanto archivos como directorios
+             //echo "<br>Nombre de archivo: $file : Es un: " . filetype($ruta .'/'. $file); 
+             //  echo "<br>Ruta: $ruta / $file";
+            if (is_dir($ruta.'/'.$file) && $file!="." && $file!=".."){ 
+
+               //solo si el archivo es un directorio, distinto que "." y ".." 
+               //echo "<br>Directorio: $ruta/$file"; 
+               $var[] = $file;
+               //listar_directorios_ruta($ruta.'/'.$file); 
+            } 
+         } 
+      closedir($dh); 
+      } 
+   }else 
+      $var = "<br>Isn't a valid path.";
+
+   return $var;
+}
+
+function eliminarDir($carpeta){
+	foreach(glob($carpeta."/*") as $archivos_carpeta){ 
+	//echo $archivos_carpeta."<br>";
+		if (@is_dir($archivos_carpeta))	{
+			eliminarDir($archivos_carpeta);
+			// echo 'dir '.$archivos_carpeta."<br>";
+		}else	{
+			if(($file = @readdir($carpeta)) !== false) {
+				//echo 'arc '.$archivos_carpeta."<br>";	
+			
+				@unlink($archivos_carpeta);
+			}
+		}
+	}@rmdir($carpeta);
+}
+
+// function SureRemoveDir($dir, $DeleteMe) {
+//     if(!$dh = @opendir($dir)) return;
+//     while (false !== ($obj = readdir($dh))) {
+//         if($obj=='.' || $obj=='..') continue;
+//         if (!@unlink($dir.'/'.$obj)) SureRemoveDir($dir.'/'.$obj, true);
+//     }
+
+//     closedir($dh);
+//     if ($DeleteMe){
+//         @rmdir($dir);
+//     }
+// }
+
 ?>
