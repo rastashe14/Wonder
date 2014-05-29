@@ -34,7 +34,7 @@ if ($_FILES['file']['size']!=0) {
 		@unlink(REL_PATH.'img/'.$img);
 
 		mysql_query("UPDATE config SET `value` = '".md5($parts[0]).'.'.$ext."' WHERE `keys` = 'logo' ") or die (mysql_error());
-		$er = 0;
+		$er = REL_PATH;
 		//$in = 'files_bello';
 		//echo $tempFile.'-'.$targetFile.'-'.$_FILES["file"]["error"];
 	} else {

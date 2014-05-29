@@ -43,7 +43,7 @@ if(isset($_GET['desc'])||isset($_GET['exits'])||isset($_GET['subio'])){
 				No file selected
 			</div><br>
 			<legend style="position: absolute;background: none">
-				<small>The image size should not exceed 2 MB</small>
+				<small class="wpanel-msg-small">The image size should not exceed 2 MB</small>
 			</legend>
 		</div>	
 	</div>
@@ -116,10 +116,10 @@ if(count($valor)>0){
 	//print_r($valor);
 	$nonActive = $themenew==''?"There isn't theme active ":"";
 
-	echo '<legend>Theme List</legend><small>Click to activate the theme. '.$nonActive.'</small><br><br><div class="row" id="listThemes">';
+	echo '<legend>Theme List</legend><small class="wpanel-msg-small">Click to activate the theme. '.$nonActive.'</small><br><br><div class="row" id="listThemes">';
 	foreach ($valor as $key) {
 		if ($themenew==$key) {
-			$class = "font-weight:bold;";
+			$class = "font-weight:bold; color:#ACACAC;";
 			$msgActive = " - Selected Theme.";
 			$imgDel = "<span style='margin-right: 29px;'></span>";
 		}else{

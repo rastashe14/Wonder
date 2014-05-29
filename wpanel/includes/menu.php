@@ -7,7 +7,7 @@
 		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	</ul>
 
-	<section class="top-bar-section"  >
+	<section class="top-bar-section" id="menu-wpanel">
 		<!-- Left Nav Section -->
 		<ul class="left " >
 			<li class="divider"></li>

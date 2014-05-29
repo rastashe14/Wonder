@@ -1,13 +1,10 @@
-<div class="row panel"> <!-- Footer -->
-	    <div class="large-12">
-	
-			
-	<small>
-
-	<strong>Developed by: </strong>&nbsp;<a href="http://maoghost.com/" target="_blank" onfocus="this.blur();">Maoghost.com</a>
-	</small>
-	
-</div>
+<div class="row panel" id="secondFooter"> <!-- Footer -->
+	<div class="large-12">
+		<small>
+			<strong>Developed by: </strong>&nbsp;<a href="http://maoghost.com/" target="_blank" onfocus="this.blur();">Maoghost.com</a>
+		</small>
+		
+	</div>
 </div>	
 <?=$jsLibraries?>
 <?=$uploadLogo?>

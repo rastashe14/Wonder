@@ -23,9 +23,10 @@
 	define('DOMINIO', 'http://'.$_SERVER['SERVER_NAME'].$_path);
 	$_url=array_shift(explode('.php',$_SERVER['REQUEST_URI']));
 	$_url=array_shift(explode('?',$_url));
-	define('REL_PATH',str_repeat('../',substr_count(substr($_url,strlen($_path)),'/')));
+	
+	define('REL_PATH',str_repeat('../',substr_count(substr($_url,strlen($_path)+1),'/')));
 	unset($_url,$_path);
-
+	
 	#Configuración principal del sitio
 	define("HREF_DEFAULT", "javascript:void(0);");
 	define("DIRECTORIO", "/");
@@ -52,39 +53,38 @@
 	#menu
 	$_LEFT_MENU[0]['LINK']=DOMINIO."?id=4&type=3";
 	$_LEFT_MENU[0]['TITLE']="Parties";
-	$_LEFT_MENU[0]['CLASS']="menuParties";
+	$_LEFT_MENU[0]['CLASS']="menuOption1";
 	//$_LEFT_MENU[0]['TOOLTIP']="Smart devices repair";
 
 	$_LEFT_MENU[1]['LINK']=DOMINIO."?id=5&type=3";
 	$_LEFT_MENU[1]['TITLE']="Pricing";
-	$_LEFT_MENU[1]['CLASS']="menuPricing";
+	$_LEFT_MENU[1]['CLASS']="menuOption2";
 	//$_LEFT_MENU[1]['TOOLTIP']="Smart devices repair";
 
 	$_LEFT_MENU[2]['LINK']=DOMINIO."?id=6&type=3";
 	$_LEFT_MENU[2]['TITLE']="Groups";
-	$_LEFT_MENU[2]['CLASS']="menuGroups";
+	$_LEFT_MENU[2]['CLASS']="menuOption3";
 	//$_LEFT_MENU[2]['TOOLTIP']="Smart devices repair";
 
 	$_LEFT_MENU[3]['LINK']=DOMINIO."?current=galery";
 	$_LEFT_MENU[3]['TITLE']="Gallery";
-	$_LEFT_MENU[3]['CLASS']="menuGallery";
+	$_LEFT_MENU[3]['CLASS']="menuOption4";
 	//$_LEFT_MENU[3]['TOOLTIP']="";
 	
 	$_LEFT_MENU[4]['LINK']=DOMINIO."?current=booking";
 	$_LEFT_MENU[4]['TITLE']="Booking";
-	$_LEFT_MENU[4]['CLASS']="menuLocation";
+	$_LEFT_MENU[4]['CLASS']="menuOption6";
 	//$_LEFT_MENU[0]['TOOLTIP']="Smart devices repair";
 
 	$_LEFT_MENU[5]['LINK']=DOMINIO."?id=7&type=3";
 	$_LEFT_MENU[5]['TITLE']="FAQs";
-	$_LEFT_MENU[5]['CLASS']="menuFAQs";
+	$_LEFT_MENU[5]['CLASS']="menuOption7";
 	//$_LEFT_MENU[1]['TOOLTIP']="Smart devices repair";
 
 	$_LEFT_MENU[6]['LINK']=DOMINIO."?current=contact";
 	$_LEFT_MENU[6]['TITLE']="Contact Us";
-	$_LEFT_MENU[6]['CLASS']="menuContact";
+	$_LEFT_MENU[6]['CLASS']="menuOption5";
 	//$_LEFT_MENU[2]['TOOLTIP']="Smart devices repair";
-
 	
 	///// RIGHT 
 	

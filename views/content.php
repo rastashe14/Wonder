@@ -55,12 +55,7 @@ if($type!=''){
 				$numN = mysql_num_rows($query);
 			
 				
-if($id=="home"){				
 ?>
-<div class="row panel text-center titleIni">
-	Remember to bring socks
-</div>
-<?php } ?>
 <div class="row panel " > 
        <div class="large-<?= $_conf['sql_menu'] ? 9 : 12 ?> columns " id="newsOrbit">
        <?php if($type==1&&$id=='home'){ ?>
@@ -70,12 +65,12 @@ if($id=="home"){
 				while($news = mysql_fetch_assoc($query)){
 				?>
 				<li>
-					<div style="padding: 0 40px">
+					<div style="padding: 0 40px" id="content-home">
 					   <p>&nbsp;</p>
 					   <h3>
-					   <a style="color:#ff810a !important;" href="<?=DOMINIO.$_conf['link']?>&id=<?=$news['id']?>"><?=$news[name]?></a>
+					   <a href="<?=DOMINIO.$_conf['link']?>&id=<?=$news['id']?>"><?=$news[name]?></a>
 					   </h3>
-					   <p style="color: #868585 !important;padding: 10px 0 0 15px;font-size: 17px !important;"><?=$news[summary]?></p>
+					   <p style="padding: 10px 0 0 15px;font-size: 17px !important;"><?=$news[summary]?></p>
 					</div>
 					<?php 
 					if($_conf['folder']){ 

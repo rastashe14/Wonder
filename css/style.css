@@ -7,7 +7,7 @@ a{
 	color: #87bff3 !important;
 }
 
-#sub-nav-top dd a{
+#top-menu-sup dd a{
 	padding: 0;
 	margin-right: 5px;
 	margin-left: -5px; 
@@ -15,7 +15,7 @@ a{
 }
 
 #sub-side-menu ul li a{
-	color:#B38448 !important; font-weight: bold;
+	color:#B38448 !important;
 }
 
 .imgdeleteWpanel{
@@ -26,7 +26,7 @@ a{
 	padding-right: 25px;
 }
 /*menu */
-.menuParties a{
+.menuOption1 a{
 	
 	background: url('../img/menu1.png') bottom no-repeat !important;
 	border:0 !important;
@@ -39,7 +39,7 @@ a{
 	text-decoration:none !important;
 	text-align: center;
 }
-.menuPricing a{
+.menuOption2 a{
 	
 	background: url('../img/menu2.png') bottom no-repeat !important;
 	border:0 !important;
@@ -52,7 +52,7 @@ a{
 	text-decoration:none !important;
 	text-align: center;
 }
-.menuGroups a{
+.menuOption3 a{
 	
 	background: url('../img/menu3.png') bottom no-repeat !important;
 	border:0 !important;
@@ -65,7 +65,7 @@ a{
 	text-decoration:none !important;
 	text-align: center;
 }
-.menuGallery a{
+.menuOption4 a{
 	
 	background: url('../img/menu4.png') bottom no-repeat !important;
 	border:0 !important;
@@ -78,33 +78,7 @@ a{
 	text-decoration:none !important;
 	text-align: center;
 }
-.menuLocation a{
-	
-	background: url('../img/menu5.png') bottom no-repeat !important;
-	border:0 !important;
-	color:#fff !important;
-	font-family: 'Open Sans', sans-serif !important;
-	font-size:25px !important;
-	font-weight:700 !important;
-	padding:10px 0px 21px !important;
-	width: 143px !important;
-	text-decoration:none !important;
-	text-align: center;
-}
-.menuFAQs a{
-	
-	background: url('../img/menu6.png') bottom no-repeat !important;
-	border:0 !important;
-	color:#fff !important;
-	font-family: 'Open Sans', sans-serif !important;
-	font-size:25px !important;
-	font-weight:700 !important;
-	padding:10px 0px 21px !important;
-	width: 143px !important;
-	text-decoration:none !important;
-	text-align: center;
-}
-.menuContact a{
+.menuOption5 a{
 	
 	background: url('../img/menu7.png') bottom no-repeat !important;
 	border:0 !important;
@@ -117,6 +91,32 @@ a{
 	text-decoration:none !important;
 	text-align: center;
 	vertical-align:text-bottom  !important;
+}
+.menuOption6 a{
+	
+	background: url('../img/menu5.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
+}
+.menuOption7 a{
+	
+	background: url('../img/menu6.png') bottom no-repeat !important;
+	border:0 !important;
+	color:#fff !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-size:25px !important;
+	font-weight:700 !important;
+	padding:10px 0px 21px !important;
+	width: 143px !important;
+	text-decoration:none !important;
+	text-align: center;
 }
 .top-bar, .top-bar-section, .left {
 	
