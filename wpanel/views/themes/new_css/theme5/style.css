@@ -3,10 +3,10 @@ body{
 	background: url('img/imgN.png') no-repeat center top #222 !important;
 
 	/*background: url(imagen.png) no-repeat center center fixed;*/
--webkit-background-size: cover;
+/*-webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
-background-size: cover;
+background-size: cover;*/
 }
 /*texto contenido de la pagina*/
 p{
