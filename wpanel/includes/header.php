@@ -43,4 +43,4 @@
 		$(document).foundation();
 	</script>
 </head>
-<body>
+<body class="bckwpanel">

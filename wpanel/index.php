@@ -10,20 +10,21 @@
 
 	$imgLogo=campo('config','`keys`','logo','value');
 ?>
-
-<div class="row">
-	<div class="large-10 columns top logo">
-		<img src="../img/<?=$imgLogo?>" width="200" style="height:70px;width:200px"/>
-	</div>
-	<div class="large-2 columns top logo" style="padding: 0;">
-		<div class="contain-to-grid" style="background: none">
-		  <nav class="top-bar" data-topbar>
-		    <section class="top-bar-section">
-			    <ul class="right">
-			      <li><a href="index.php?url=views/themes/themes.php">Themes</a></li>
-			    </ul>
-			  </section>
-		  </nav>
+<div id="header-menu">	
+	<div class="row">
+		<div class="large-10 columns top logo">
+			<img src="../img/<?=$imgLogo?>" width="200" style="height:70px;width:200px"/>
+		</div>
+		<div class="large-2 columns top logo" style="padding: 0;">
+			<div class="contain-to-grid" style="background: none">
+			  <nav class="top-bar" data-topbar>
+			    <section class="top-bar-section">
+				    <ul class="right">
+				      <li><a href="index.php?url=views/themes/themes.php">Themes</a></li>
+				    </ul>
+				  </section>
+			  </nav>
+			</div>
 		</div>
 	</div>
 </div>

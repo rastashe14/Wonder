@@ -1,5 +1,4 @@
 <nav class="top-bar" data-topbar data-options="is_hover: false" style="background: #333 !important;">
-	
 	<ul class="title-area">
 		<li class="name">
 		<h1><a style="cursor: default"><?=$_SESSION['wspanel_user']['nombre']?></a></h1>
